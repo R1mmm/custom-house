@@ -20,7 +20,7 @@ export default function TabNav() {
       <Tab.Screen
         options={{
           headerShown: false,
-          animationEnabled: false,
+          //   animationEnabled: false,
           tabBarActiveTinitColor: "black",
           tabBarIcon: ({ focused }) => (
             <Ionicons
