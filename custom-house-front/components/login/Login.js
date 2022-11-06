@@ -1,8 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, TextInput, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 import Light from "../../assets/house_light.png";
 
-export default function Main({ navigation }) {
+export default function Login({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.imageView}>
@@ -12,10 +20,6 @@ export default function Main({ navigation }) {
         />
       </View>
       <Text style={styles.customHouse}>Custom House</Text>
-      <Button
-        onPress={() => navigation.navigate("Home")}
-        title="홈 화면으로 가기"
-      ></Button>
 
       <View style={styles.idAndPw}>
         <View style={styles.inputBox}>
@@ -27,6 +31,12 @@ export default function Main({ navigation }) {
         <View style={styles.inputBox}>
           <Text style={styles.idText}>PW</Text>
         </View>
+        <TouchableOpacity
+          style={styles.loginBox}
+          onPress={() => navigation.navigate("Tab")}
+        >
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.findBox}>
@@ -63,7 +73,8 @@ const styles = StyleSheet.create({
   },
   idAndPw: {
     marginTop: 30,
-    marginBottom: 90,
+    marginBottom: 30,
+    display: "flex",
   },
   inputBox: {
     width: 250,
@@ -86,5 +97,20 @@ const styles = StyleSheet.create({
   },
   findText: {
     marginBottom: 10,
+  },
+  loginBox: {
+    width: 250,
+    height: 40,
+    backgroundColor: "#66CC99",
+    boxShadow: "0px 4px 4px rgba(223, 223, 223, 0.25)",
+    borderRadius: "5px",
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
+  loginText: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    color: "white",
   },
 });
