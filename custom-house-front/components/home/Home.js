@@ -40,7 +40,9 @@ export default function Home() {
             님이 적용중인 루틴이에요
           </Text>
           <View style={styles.routinListBox}>
-            <Text style={styles.routinListText}>방청소하기</Text>
+            <Text style={styles.routinListText}>방 청소하기</Text>
+            <Text style={styles.routinListText}>방해되는 요소 차단</Text>
+            <Text style={styles.routinListText}>깨끗한 공기</Text>
           </View>
         </View>
       </View>
@@ -113,10 +115,11 @@ const styles = StyleSheet.create({
     marginTop: "5%",
     height: "70%",
     width: "100%",
+    justifyContent: "space-between",
     backgroundColor: "#F8F8F8",
     boxShadow: "0px 4px 4px rgba(205, 205, 205, 0.25)",
     borderRadius: "10",
-    padding: "10%",
+    padding: "9%",
   },
   routinListText: {
     color: "black",

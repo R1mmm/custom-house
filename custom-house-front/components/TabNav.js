@@ -1,6 +1,5 @@
 import Home from "./home/Home";
-import RoutinList from "./routinList/RoutinList";
-import TopNav from "./routinList/TopNav";
+import TopNav from "./routineList/TopNav";
 import React from "react";
 import "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -11,7 +10,8 @@ export default function TabNav() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
-      tabBarOptions={{
+      screenOptions={{
+        style: { borderTopWidth: 0 },
         tabBarStyle: {
           backgroundColor: "#66CC99",
         },
@@ -22,9 +22,10 @@ export default function TabNav() {
           headerShown: false,
           //   animationEnabled: false,
           tabBarActiveTinitColor: "black",
+          tabBarLabelStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#00B386" : "#404040" }}
+              style={{ color: focused ? "black" : "white" }}
               name="ios-home"
               size={25}
             />
@@ -41,9 +42,11 @@ export default function TabNav() {
             fontWeight: "500",
             fontSize: 15,
           },
+          headerShadowVisible: false, // applied here
+          tabBarLabelStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#00B386" : "#404040" }}
+              style={{ color: focused ? "black" : "white" }}
               name="ios-document-text-outline"
               size={25}
             />
