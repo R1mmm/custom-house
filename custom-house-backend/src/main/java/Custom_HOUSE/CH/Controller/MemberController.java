@@ -14,7 +14,7 @@ public class MemberController {
     @Autowired
     private MemberRepository repository;
 
-    @PostMapping("/addMember")
+    @PostMapping("/api/new-member")
     public String saveMember(@RequestBody Member member) {
         repository.save(member);
         return "Added member with id: " + member.getId();
