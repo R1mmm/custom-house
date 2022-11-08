@@ -12,9 +12,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection="Member")
 public class Member {
     @Id
-    private int id;
+    private int num;
     private String name;
+    private String id;
     private String password;
     private String gender;
+    private String birth;
+    private int household;
 
 }

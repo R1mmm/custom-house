@@ -3,6 +3,8 @@ package Custom_HOUSE.CH.Controller;
 import Custom_HOUSE.CH.Repository.MemberRepository;
 import Custom_HOUSE.CH.model.Member;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +15,7 @@ public class MemberController {
 
     @Autowired
     private MemberRepository repository;
+    private String name;
 
     @PostMapping("/api/new-member")
     public String saveMember(@RequestBody Member member) {
@@ -35,4 +38,6 @@ public class MemberController {
         repository.deleteById(id);
         return "Deleted member with id: " + id;
     }
+
 }
+
