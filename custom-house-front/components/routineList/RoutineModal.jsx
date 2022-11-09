@@ -40,10 +40,6 @@ export default function RoutineModal({ setIsModalVisible, isModalVisible }) {
           <Text style={styles.funcText}>
             세탁기 및 건조기 동작을 일시정지해요
           </Text>
-
-          {/* <View style={styles.funcBox}></View>
-          <View style={styles.funcBox}></View>
-          <View style={styles.funcBox}></View> */}
         </View>
         <TouchableOpacity style={styles.routineAddBtn}>
           <Text style={styles.routineAddText}>루틴 추가하기</Text>
@@ -66,8 +62,8 @@ const styles = StyleSheet.create({
     borderRadius: "20px",
     paddingRight: 10,
     paddingLeft: 10,
-    paddingBottom: 2,
-    paddingTop: 2,
+    paddingBottom: 5,
+    paddingTop: 5,
     marginBottom: 10,
   },
   routineTitleText: {
@@ -123,8 +119,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   routineAddText: {
-    fontSize: 25,
+    fontSize: 22,
     color: "white",
-    fontWeight: "600",
+    fontWeight: "700",
   },
 });

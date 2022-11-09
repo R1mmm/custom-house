@@ -1,5 +1,6 @@
 import Home from "./home/Home";
 import TopNav from "./routineList/TopNav";
+import CustomRoutineStart from "./customRoutine/CustomRoutineStart";
 import React from "react";
 import "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,13 +20,14 @@ export default function TabNav() {
     >
       <Tab.Screen
         options={{
+          tabBarLabel: "홈",
           headerShown: false,
           //   animationEnabled: false,
           tabBarActiveTinitColor: "black",
           tabBarLabelStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "black" : "white" }}
+              style={{ color: focused ? "#085E33" : "white" }}
               name="ios-home"
               size={25}
             />
@@ -37,6 +39,7 @@ export default function TabNav() {
       <Tab.Screen
         name="Routine"
         options={{
+          tabBarLabel: "루틴 추천",
           title: "ROUTINE RECOMMENDATION",
           headerTitleStyle: {
             fontWeight: "500",
@@ -46,13 +49,34 @@ export default function TabNav() {
           tabBarLabelStyle: { color: "white" },
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "black" : "white" }}
+              style={{ color: focused ? "#085E33" : "white" }}
               name="ios-document-text-outline"
               size={25}
             />
           ),
         }}
         component={TopNav}
+      />
+      <Tab.Screen
+        name="CustomRoutine"
+        options={{
+          tabBarLabel: "루틴 추가",
+          title: "CUSTOMIZE ROUTINE",
+          headerTitleStyle: {
+            fontWeight: "500",
+            fontSize: 15,
+          },
+          headerShadowVisible: false, // applied here
+          tabBarLabelStyle: { color: "white" },
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              style={{ color: focused ? "#085E33" : "white" }}
+              name="ios-add-circle-sharp"
+              size={25}
+            />
+          ),
+        }}
+        component={CustomRoutineStart}
       />
     </Tab.Navigator>
   );
