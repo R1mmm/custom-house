@@ -1,4 +1,5 @@
 import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,6 +12,18 @@ import {
 import Light from "../../assets/house_light.png";
 
 export default function Login({ navigation }) {
+  // const [socialModalVisible, setSocialModalVisible] = useState(false);
+  // const [source, setSource] = useState("");
+
+  // const onPressSocial = async (social) => {
+  //   setSocialModalVisible(!socialModalVisible);
+  //   setSource(`http://localhost:8080/${social}`);
+  // };
+
+  // const closeSocialModal = async () => {
+  //   setSocialModalVisible(socialModalVisible);
+  // };
+
   return (
     <View style={styles.container}>
       <View style={styles.imageView}>
@@ -29,18 +42,37 @@ export default function Login({ navigation }) {
           ></TextInput>
         </View>
         <View style={styles.inputBox}>
-          <Text style={styles.idText}>PW</Text>
+          <TextInput
+            style={styles.idText}
+            secureTextEntry={true}
+            placeholder="password"
+          ></TextInput>
         </View>
+        {/* {source !== undefined ? (
+          <SocialWebviewModal
+            visible={socialModalVisible}
+            source={source}
+            closeSocialModal={closeSocialModal}
+          />
+        ) : null} */}
         <TouchableOpacity
           style={styles.loginBox}
           onPress={() => navigation.navigate("Tab")}
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.kakaoLoginBox}
+          // onPress={() => onPressSocial("kakao")}
+        >
+          <Text style={styles.kakaoLoginText}>카카오로 로그인하기</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.findBox}>
-        <Text style={styles.findText}>회원가입</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
+          <Text style={styles.findText}>회원가입</Text>
+        </TouchableOpacity>
 
         <Text style={styles.findText}>ID/패스워드 찾기</Text>
       </View>
@@ -108,9 +140,24 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "flex-start",
   },
+  kakaoLoginBox: {
+    width: 250,
+    height: 40,
+    backgroundColor: "#FEE500",
+    boxShadow: "0px 4px 4px rgba(223, 223, 223, 0.25)",
+    borderRadius: "5px",
+    margin: 10,
+    justifyContent: "center",
+    alignItems: "flex-start",
+  },
   loginText: {
     alignSelf: "center",
     fontWeight: "bold",
     color: "white",
+  },
+  kakaoLoginText: {
+    alignSelf: "center",
+    fontWeight: "bold",
+    color: "#191919",
   },
 });
