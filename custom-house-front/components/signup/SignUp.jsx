@@ -58,12 +58,7 @@ export default function SignUp({ navigation }) {
     };
     setTimeout(function () {
       axios
-        .post(
-          "https://f34a89d9-8f6e-4263-afb4-19ecb497d18a.mock.pstmn.io/api/new-member",
-          {
-            values,
-          }
-        )
+        .post("https://fe50-58-142-81-222.jp.ngrok.io/subs", values)
         .then(function (response) {
           console.log(response);
           console.log(values);
