@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import SelectDropdown from "react-native-select-dropdown";
 import {
   StyleSheet,
   Text,
@@ -7,10 +8,75 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Alert,
 } from "react-native";
-import RNPickerSelect from "react-native-picker-select";
+import axios from "axios";
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
+  const genders = ["남성", "여성"];
+  const households = ["1인", "2인", "3인", "4인", "5인 이상"];
+
+  const [name, setName] = useState("");
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+  const [pw, setPw] = useState(false);
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [household, setHousehold] = useState("");
+
+  const checkPassword = (text) => {
+    setPasswordCheck(text);
+    if (text === password) {
+      setPw(true);
+    } else {
+      setPw(false);
+    }
+  };
+
+  useEffect(() => {}, [passwordCheck, setPasswordCheck]);
+
+  const signUp = () => {
+    if (
+      name == "" ||
+      id == "" ||
+      password == "" ||
+      gender == "" ||
+      age == "" ||
+      household == ""
+    ) {
+      Alert.alert("입력되지 않은 정보가 있습니다");
+      return;
+    }
+    const values = {
+      name: name,
+      id: id,
+      password: password,
+      gender: gender,
+      age: age,
+      household: household,
+    };
+    setTimeout(function () {
+      axios
+        .post(
+          "https://f34a89d9-8f6e-4263-afb4-19ecb497d18a.mock.pstmn.io/api/new-member",
+          {
+            values,
+          }
+        )
+        .then(function (response) {
+          console.log(response);
+          console.log(values);
+          navigation.navigate("Login");
+          Alert.alert("성공적으로 가입되었습니다!");
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert("회원가입 실패");
+        });
+    }, 100);
+  };
+
   return (
     <View style={styles.Container}>
       <Text style={styles.signupFont}>내멋대로ㅎLG 회원가입</Text>
@@ -19,83 +85,126 @@ export default function SignUp() {
         <Text style={styles.inputTitle}>이름</Text>
         <TextInput
           placeholder="이름"
+          onChangeText={setName}
           style={styles.textInput}
         />
         <Text style={styles.inputTitle}>아이디</Text>
         <View style={styles.idContainer}>
           <TextInput
             placeholder="ID"
+            onChangeText={setId}
             style={styles.textInput}
           />
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={styles.idButton}
             // onPress={() => navigation.navigate("Main")}
           >
             <Text style={styles.idButtonFont}>중복 확인</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <Text style={styles.inputTitle}>비밀번호</Text>
         <TextInput
           placeholder="비밀번호 8자 이상"
           secureTextEntry={true}
+          onChangeText={setPassword}
           style={styles.textInput}
         />
+        {password.length >= 8 ? null : (
+          <Text style={{ color: "red", marginBottom: 15 }}>
+            비밀번호는 8자 이상이어야 합니다
+          </Text>
+        )}
         <Text style={styles.inputTitle}>비밀번호 확인</Text>
         <TextInput
           placeholder="비밀번호 확인"
           secureTextEntry={true}
+          onChangeText={(text) => checkPassword(text)}
           style={styles.textInput}
         />
+        {pw ? (
+          <Text style={{ color: "green", marginBottom: 15 }}>
+            비밀번호가 일치합니다.
+          </Text>
+        ) : (
+          <Text style={{ color: "red", marginBottom: 15 }}>
+            비밀번호가 일치하지 않습니다.
+          </Text>
+        )}
         <Text style={styles.inputTitle}>전화번호</Text>
         <TextInput
           keyboardType="numeric"
           placeholder="전화번호"
           style={styles.textInput}
         />
-        <Text style={styles.inputTitle}>이메일</Text>
+        {/* <Text style={styles.inputTitle}>이메일</Text>
         <TextInput
           placeholder="E-mail"
+          onChangeText={set}
+
           style={styles.textInput}
-        />
+        /> */}
         <Text style={styles.inputTitle}>성별</Text>
         <View style={styles.radioButtonContainer}>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.radioButton}
-          >
-            <View style={styles.radioButtonIcon} />
-          </TouchableOpacity>
-          <Text style={styles.radioButtonText}>남자</Text>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={styles.radioButton}
-          >
-            <View style={styles.radioButtonIcon} />
-          </TouchableOpacity>
-          <Text style={styles.radioButtonText}>여자</Text>
+          <SelectDropdown
+            data={genders}
+            defaultButtonText="성별"
+            buttonTextStyle={{
+              color: "#30a874",
+              fontWeight: "600",
+            }}
+            buttonStyle={{
+              borderRadius: 10,
+              fontSize: 18,
+              backgroundColor: "#f3f3f3",
+            }}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+              setGender(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
         </View>
         <Text style={styles.inputTitle}>나이</Text>
         <TextInput
           keyboardType="numeric"
           placeholder="나이"
+          onChangeText={setAge}
           style={styles.textInput}
         />
         <Text style={styles.inputTitle}>가구 크기</Text>
-        <RNPickerSelect
-          style={styles.pickerStyle}
-          onValueChange={(value) => console.log(value)}
-          items={[
-            { label: "1인", value: "1" },
-            { label: "2인", value: "2" },
-            { label: "3인", value: "3" },
-            { label: "4인", value: "4" },
-            { label: "5인 이상", value: "5" },
-          ]}
+        <SelectDropdown
+          data={households}
+          defaultButtonText="가구 크기"
+          buttonTextStyle={{
+            color: "#30a874",
+            fontWeight: "600",
+          }}
+          buttonStyle={{
+            borderRadius: 10,
+            fontSize: 18,
+            marginTop: 10,
+            backgroundColor: "#f3f3f3",
+          }}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index);
+            setHousehold(selectedItem);
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem;
+          }}
+          rowTextForSelection={(item, index) => {
+            return item;
+          }}
         />
       </ScrollView>
       <TouchableOpacity
         style={styles.signupButton}
-        // onPress={() => navigation.navigate("Main")}
+        onPress={signUp}
       >
         <Text style={styles.signupFont2}>Sign Up</Text>
       </TouchableOpacity>
@@ -121,7 +230,6 @@ const styles = StyleSheet.create({
     paddingLeft: "3%",
   },
   mainContainer: {
-    backgroundColor: "#fff",
     // justifyContent: "space-between",
     // alignItems: "flex-start",
     paddingLeft: "3%",
@@ -136,15 +244,19 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   textInput: {
-    // borderRadius: 10,
+    borderRadius: 10,
     border: "1px solid",
     height: 50,
-    width: 200,
+    width: 270,
     fontSize: 18,
     marginTop: 5,
     marginBottom: 10,
     padding: 10,
-    // backgroundColor: "#f3f3f3",
+    backgroundColor: "#f3f3f3",
+  },
+  passwordConfirm: {
+    marginBottom: 10,
+    fontWeight: "500",
   },
   signupButton: {
     width: 180,
