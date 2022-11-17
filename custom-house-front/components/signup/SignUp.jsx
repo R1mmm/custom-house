@@ -49,7 +49,7 @@ export default function SignUp({ navigation }) {
       return;
     }
     const values = {
-      name: name,
+      username: name,
       id: id,
       password: password,
       gender: gender,

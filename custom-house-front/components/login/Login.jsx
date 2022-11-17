@@ -10,8 +10,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Light from "../../assets/house_light.png";
+import axios from "axios";
 
 export default function Login({ navigation }) {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
   // const [socialModalVisible, setSocialModalVisible] = useState(false);
   // const [source, setSource] = useState("");
 
@@ -23,6 +26,27 @@ export default function Login({ navigation }) {
   // const closeSocialModal = async () => {
   //   setSocialModalVisible(socialModalVisible);
   // };
+
+  const signIn = () => {
+    const values = {
+      id: id,
+      password: password,
+    };
+    setTimeout(function () {
+      axios
+        .post("https://fe50-58-142-81-222.jp.ngrok.io/auth", values)
+        .then(function (response) {
+          console.log(response);
+          console.log(values);
+          navigation.navigate("Tab");
+          Alert.alert("안녕하세요 나랭님~");
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert("로그인 실패");
+        });
+    }, 100);
+  };
 
   return (
     <View style={styles.container}>
@@ -37,12 +61,14 @@ export default function Login({ navigation }) {
       <View style={styles.idAndPw}>
         <View style={styles.inputBox}>
           <TextInput
+            onChangeText={setId}
             style={styles.idText}
             placeholder="ID"
           ></TextInput>
         </View>
         <View style={styles.inputBox}>
           <TextInput
+            onChangeText={setPassword}
             style={styles.idText}
             secureTextEntry={true}
             placeholder="password"
@@ -57,7 +83,8 @@ export default function Login({ navigation }) {
         ) : null} */}
         <TouchableOpacity
           style={styles.loginBox}
-          onPress={() => navigation.navigate("Tab")}
+          // onPress={() => navigation.navigate("Tab")}
+          onPress={signIn}
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableOpacity>
