@@ -33,14 +33,27 @@ export default function Home() {
             style={styles.image}
           />
         </View>
-        <View style={styles.divider}></View>
+        {/* <View style={styles.divider}></View> */}
         <View style={styles.routinBox}>
           <Text style={styles.routinText}>
             <Text style={{ color: "#66CC99" }}>나림</Text>
             님이 적용중인 루틴이에요
           </Text>
           <View style={styles.routinListBox}>
-            <Text style={styles.routinListText}>방청소하기</Text>
+            <Text style={styles.routinListText}>방 청소하기</Text>
+            <Text style={styles.routinListText}>방해되는 요소 차단</Text>
+            <Text style={styles.routinListText}>깨끗한 공기</Text>
+          </View>
+        </View>
+        <View style={styles.routinBox}>
+          <Text style={styles.routinText}>
+            <Text style={{ color: "#66CC99" }}>나림</Text>
+            님이 현재 실행중인 제품이에요
+          </Text>
+          <View style={styles.routinListBox}>
+            <Text style={styles.routinListText}>LG 트롬 건조기</Text>
+            <Text style={styles.routinListText}>대박 짱 큰 티비</Text>
+            <Text style={styles.routinListText}>공기청정기</Text>
           </View>
         </View>
       </View>
@@ -83,7 +96,7 @@ const styles = StyleSheet.create({
   headerBox: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginBottom: "10%",
+    marginBottom: "5%",
   },
   textBox: {
     marginTop: "30%",
@@ -99,11 +112,13 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
   },
   routinBox: {
-    height: "40%",
+    height: "30%",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    padding: "5%",
+    paddingRight: "5%",
+    paddingLeft: "5%",
+    marginBottom: "5%",
   },
   routinText: {
     fontSize: 15,
@@ -111,12 +126,13 @@ const styles = StyleSheet.create({
   },
   routinListBox: {
     marginTop: "5%",
-    height: "70%",
+    height: "80%",
     width: "100%",
+    justifyContent: "space-between",
     backgroundColor: "#F8F8F8",
     boxShadow: "0px 4px 4px rgba(205, 205, 205, 0.25)",
     borderRadius: "10",
-    padding: "10%",
+    padding: "9%",
   },
   routinListText: {
     color: "black",
