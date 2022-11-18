@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89c3a6b8-9d50-4232-9c14-cbde204a15cb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="89c3a6b8-9d50-4232-9c14-cbde204a15cb" name="Changes" comment="[feat] Find Id, Find PW">
+      <change afterPath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom-house-backend/CH.iml" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/CH.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom-house-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/Controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/Controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/Repository/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/Repository/MemberRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/model/Member.java" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/src/main/java/Custom_HOUSE/CH/model/Member.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/custom-house-backend/target/classes/Custom_HOUSE/CH/Controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/target/classes/Custom_HOUSE/CH/Controller/MemberController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom-house-backend/target/classes/Custom_HOUSE/CH/model/Member.class" beforeDir="false" afterPath="$PROJECT_DIR$/custom-house-backend/target/classes/Custom_HOUSE/CH/model/Member.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -46,29 +49,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/ygh12/OneDrive/문서/GitHub/custom-house/custom-house-backend/pom.xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "spring.configuration.checksum": "1ee0bf89c5d1032317d13a2e022793c8"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ygh12/OneDrive/문서/GitHub/custom-house/custom-house-backend/pom.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1ee0bf89c5d1032317d13a2e022793c8&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.ChApplication">
     <configuration name="Custom_HOUSE.CH.ChApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="18" />
@@ -118,8 +121,18 @@
       <option name="presentableId" value="Default" />
       <updated>1667920873242</updated>
       <workItem from="1667920876506" duration="12413000" />
-      <workItem from="1668142255322" duration="9322000" />
+      <workItem from="1668142255322" duration="10157000" />
+      <workItem from="1668515373895" duration="7365000" />
+      <workItem from="1668694165692" duration="1945000" />
     </task>
+    <task id="LOCAL-00001" summary="[feat] Find Id, Find PW">
+      <created>1668155475057</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668155475057</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,5 +148,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="[feat] Find Id, Find PW" />
+    <option name="LAST_COMMIT_MESSAGE" value="[feat] Find Id, Find PW" />
   </component>
 </project>
