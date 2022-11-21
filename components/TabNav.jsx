@@ -1,6 +1,7 @@
 import Home from "./home/Home";
 import TopNav from "./routineList/TopNav";
 import CustomRoutineStart from "./customRoutine/CustomRoutineStart";
+import MyPage from "./myPage/MyPage";
 import React from "react";
 import "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
@@ -77,6 +78,27 @@ export default function TabNav() {
           ),
         }}
         component={CustomRoutineStart}
+      />
+      <Tab.Screen
+        name="MyPage"
+        options={{
+          tabBarLabel: "마이페이지",
+          title: "MY PAGE",
+          headerTitleStyle: {
+            fontWeight: "500",
+            fontSize: 15,
+          },
+          headerShadowVisible: false, // applied here
+          tabBarLabelStyle: { color: "white" },
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              style={{ color: focused ? "#085E33" : "white" }}
+              name="ios-person-sharp"
+              size={25}
+            />
+          ),
+        }}
+        component={MyPage}
       />
     </Tab.Navigator>
   );

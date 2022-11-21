@@ -28,24 +28,25 @@ export default function Login({ navigation }) {
   // };
 
   const signIn = () => {
-    const values = {
-      id: id,
-      password: password,
-    };
-    setTimeout(function () {
-      axios
-        .post("https://fe50-58-142-81-222.jp.ngrok.io/auth", values)
-        .then(function (response) {
-          console.log(response);
-          console.log(values);
-          navigation.navigate("Tab");
-          Alert.alert("안녕하세요 나랭님~");
-        })
-        .catch(function (error) {
-          console.log(error);
-          Alert.alert("로그인 실패");
-        });
-    }, 100);
+    navigation.navigate("Tab");
+    // const values = {
+    //   id: id,
+    //   password: password,
+    // };
+    // setTimeout(function () {
+    //   axios
+    //     .post("https://fe50-58-142-81-222.jp.ngrok.io/auth", values)
+    //     .then(function (response) {
+    //       console.log(response);
+    //       console.log(values);
+    //       navigation.navigate("Tab");
+    //       Alert.alert("안녕하세요 나랭님~");
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //       Alert.alert("로그인 실패");
+    //     });
+    // }, 100);
   };
 
   return (
