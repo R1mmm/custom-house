@@ -1,4 +1,12 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  ScrollView,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled, { css } from "styled-components/native";
@@ -14,6 +22,9 @@ export default function CustomRoutine({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedProd, setSelectedProd] = useState("");
   const [commandType, setCommandType] = useState("");
+  const [command, setCommand] = useState(null);
+  const [timer, setTimer] = useState(null);
+  const [routineName, setRoutineName] = useState(null);
 
   useEffect(() => {
     console.log(productsList);
@@ -38,8 +49,19 @@ export default function CustomRoutine({ navigation }) {
     }
   };
 
+  const createCustomRtn = () => {
+    const values = {
+      routineName: routineName,
+      keyword: command,
+      time_Set: timer,
+      applliance: productsList,
+    };
+
+    console.log(values);
+  };
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ProductModal
         setIsModalVisible={setIsModalVisible}
         isModalVisible={isModalVisible}
@@ -47,7 +69,7 @@ export default function CustomRoutine({ navigation }) {
         prod_obj={products}
         setProductsList={setProductsList}
       />
-      <Text style={styles.title}>가전 제품 선택</Text>
+      <Text style={styles.selectProd}>가전 제품 선택</Text>
       <View style={styles.productContainer}>
         {ProductData.map((product, index) => (
           <IconBox
@@ -64,7 +86,11 @@ export default function CustomRoutine({ navigation }) {
           </IconBox>
         ))}
       </View>
-      <Text style={styles.title}>명령 유형 선택</Text>
+      <SettingTitle>루틴 이름 설정</SettingTitle>
+      <SettingInput
+        onChangeText={(text) => setRoutineName(text)}
+      ></SettingInput>
+      <SettingTitle>명령 유형 선택</SettingTitle>
       <SelectDropdown
         data={["명령어", "시간"]}
         defaultButtonText="선택"
@@ -91,23 +117,35 @@ export default function CustomRoutine({ navigation }) {
         }}
       />
       {commandType == "명령어" ? (
-        <Text>명령어 설정</Text>
+        <>
+          <SettingTitle>명령어 설정</SettingTitle>
+          <SettingInput
+            onChangeText={(text) => setCommand(text)}
+          ></SettingInput>
+        </>
       ) : (
-        <Text>시간 설정</Text>
+        <>
+          <SettingTitle>시간 설정</SettingTitle>
+          <SettingInput onChangeText={(text) => setTimer(text)}></SettingInput>
+        </>
       )}
-    </View>
+      <SubmitBtn onPress={createCustomRtn}>
+        <SubmitText>루틴 생성하기</SubmitText>
+      </SubmitBtn>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    justifyContent: "center",
+    // justifyContent: "center",
     padding: 30,
     width: "100%",
     height: "100%",
   },
-  title: {
+  selectProd: {
+    marginTop: 100,
     fontSize: 15,
     fontWeight: "700",
   },
@@ -140,4 +178,38 @@ const IconBox = styled.TouchableOpacity`
     css`
       border: 3px solid #66cc99;
     `}
+`;
+
+const SettingTitle = styled.Text`
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 15px;
+`;
+
+const SettingInput = styled.TextInput`
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 15px;
+  width: 200px;
+  border: 2px solid #cecece;
+  border-radius: 10px;
+  padding: 10px;
+`;
+
+const SubmitBtn = styled.TouchableOpacity`
+  width: 200px;
+  height: 50px;
+  background-color: #daeae2;
+  margin-top: 50px;
+  margin-bottom: 150px;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+`;
+const SubmitText = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: #474747;
 `;
