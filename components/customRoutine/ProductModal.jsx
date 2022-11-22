@@ -59,6 +59,64 @@ export default function ProductModal({
     setIsModalVisible(false);
   };
 
+  const pickDatas = (func) => {
+    switch (func) {
+      case "세탁 모드":
+        return ["표준", "울코스"];
+      case "바람 세기":
+        return ["강", "중", "약"];
+      case "화력 설정":
+        return ["강", "중", "약"];
+      case "작동 시간":
+        return ["10분", "20분", "30분", "1시간"];
+      case "건조 모드":
+        return ["이불", "신발"];
+      case "헹굼 횟수":
+        return [1, 2, 3, 4, 5];
+      case "탈수 강도":
+        return [1, 2, 3, 4, 5];
+      case "물 온도":
+        return [10, 20, 30];
+      case "희망 온도": //에어컨
+        return [18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+      case "온도 설정": //광파오븐
+        return [120, 140, 160, 180, 200];
+      case "타이머 설정":
+        return [10, 20, 30];
+      default:
+        return ["ON", "OFF"];
+    }
+  };
+
+  const pickDefault = (func) => {
+    switch (func) {
+      case "작동 시간":
+        return "시간 설정";
+      case "바람 세기":
+        return "세기 설정";
+      case "화력 설정":
+        return "설정";
+      case "세탁 모드":
+        return "모드 설정";
+      case "건조 모드":
+        return "모드 설정";
+      case "헹굼 횟수":
+        return "횟수 설정";
+      case "탈수 강도":
+        return "강도 설정";
+      case "물 온도":
+        return "온도 설정";
+      case "희망 온도":
+        return "온도 설정";
+      case "온도 설정": //광파오븐
+        return "온도 설정";
+      case "타이머 설정":
+        return "설정";
+      default:
+        return "ON/OFF";
+    }
+  };
+
   return (
     <Modal
       animationType={"slide"}
@@ -81,10 +139,21 @@ export default function ProductModal({
             funcs === "화구 ON/OFF" ||
             funcs === "절약 건조" ||
             funcs === "구김방지여부" ||
-            funcs === "보관 여부" ? (
+            funcs === "보관 여부" ||
+            funcs === "세탁 모드" ||
+            funcs === "헹굼 횟수" ||
+            funcs === "탈수 강도" ||
+            funcs === "물 온도" ||
+            funcs === "건조 모드" ||
+            funcs === "작동 시간" ||
+            funcs === "바람 세기" ||
+            funcs === "희망 온도" ||
+            funcs === "온도 설정" ||
+            funcs === "화력 설정" ||
+            funcs === "타이머 설정" ? (
               <SelectDropdown
-                data={power}
-                defaultButtonText="ON/OFF"
+                data={pickDatas(funcs)}
+                defaultButtonText={pickDefault(funcs)}
                 buttonTextStyle={{
                   color: "#30a874",
                   fontWeight: "600",
@@ -128,15 +197,12 @@ const Contianer = styled.ScrollView`
   display: flex;
   flex-direction: column;
   height: 100%;
-  /* justify-content: center; */
-  /* align-items: center; */
   align-content: center;
-  /* overflow: scroll; */
   padding: 40px 40px 40px 40px;
 `;
 
 const ProdImage = styled.Image`
-  width: 100px;
+  width: 200px;
   height: 200px;
   align-self: center;
 `;

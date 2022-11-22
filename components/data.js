@@ -29,11 +29,7 @@ const ProductData = [
     name: "oven",
     krName: "광파오븐",
     img: oven,
-    func: [
-      "전원 ON/OFF",
-      "시간 조절 (원하는 작동 시간을 설정하세요)",
-      "온도 조절 (원하는 온도를 설정하세요)",
-    ],
+    func: ["전원 ON/OFF", "작동 시간", "온도 설정"],
     funcKey: ["power", "set_time", "set_temp"],
   },
   {
