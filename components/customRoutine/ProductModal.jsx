@@ -178,6 +178,7 @@ export default function ProductModal({
               />
             ) : (
               <InputBox
+                key={index}
                 placeholder="원하는 숫자를 입력하세요"
                 keyboardType="numeric"
                 onChangeText={(text) => setDetail(text, index)}

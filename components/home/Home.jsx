@@ -1,10 +1,17 @@
 import { Text, View, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import "react-native-gesture-handler";
 import homeImg from "../../assets/home-chr.png";
 import HighlightText from "react-native-highlight-underline-text";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Home() {
+  const [userName, setUserName] = useState("");
+  //유저 닉네임 불러오기
+  AsyncStorage.getItem("nickname", (err, result) => {
+    console.log(result); // User1 출력
+    setUserName(result);
+  });
   return (
     <View style={styles.container}>
       <View style={styles.logoBox}>
@@ -18,7 +25,7 @@ export default function Home() {
               underlineSize={10}
               underlineColor="#66CC99"
               textStyle={{ fontSize: 30, fontWeight: "900" }}
-              text="나림님,"
+              text={`${userName}님,`}
             />
             <HighlightText
               isFixed

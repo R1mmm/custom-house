@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,6 +16,8 @@ import ProductModal from "./ProductModal";
 import { prodList } from "../atom";
 import { useRecoilState } from "recoil";
 import SelectDropdown from "react-native-select-dropdown";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function CustomRoutine({ navigation }) {
   const [productsList, setProductsList] = useRecoilState(prodList);
@@ -25,6 +28,12 @@ export default function CustomRoutine({ navigation }) {
   const [command, setCommand] = useState(null);
   const [timer, setTimer] = useState(null);
   const [routineName, setRoutineName] = useState(null);
+  const [userId, setUserId] = useState("");
+  //유저 닉네임 불러오기
+  AsyncStorage.getItem("user_id", (err, result) => {
+    console.log(result); // User1 출력
+    setUserId(result);
+  });
 
   useEffect(() => {
     console.log(productsList);
@@ -51,12 +60,27 @@ export default function CustomRoutine({ navigation }) {
 
   const createCustomRtn = () => {
     const values = {
+      userId: userId,
       routineName: routineName,
       keyword: command,
       time_Set: timer,
-      applliance: productsList,
+      appliance: productsList,
     };
 
+    setTimeout(function () {
+      axios
+        .post("https://812d-218-235-241-52.jp.ngrok.io/new-routine", values)
+        .then(function (response) {
+          console.log(response);
+          console.log(values);
+          // navigation.navigate("Tab");
+          Alert.alert("저장 완료~");
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert("저장 실패~");
+        });
+    }, 100);
     console.log(values);
   };
 

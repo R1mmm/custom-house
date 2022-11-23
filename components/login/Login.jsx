@@ -8,9 +8,11 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import Light from "../../assets/house_light.png";
 import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
   const [id, setId] = useState("");
@@ -28,25 +30,32 @@ export default function Login({ navigation }) {
   // };
 
   const signIn = () => {
-    navigation.navigate("Tab");
-    // const values = {
-    //   id: id,
-    //   password: password,
-    // };
-    // setTimeout(function () {
-    //   axios
-    //     .post("https://fe50-58-142-81-222.jp.ngrok.io/auth", values)
-    //     .then(function (response) {
-    //       console.log(response);
-    //       console.log(values);
-    //       navigation.navigate("Tab");
-    //       Alert.alert("안녕하세요 나랭님~");
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //       Alert.alert("로그인 실패");
-    //     });
-    // }, 100);
+    // navigation.navigate("Tab");
+    const values = {
+      username: id,
+      password: password,
+    };
+    setTimeout(function () {
+      axios
+        .post("https://812d-218-235-241-52.jp.ngrok.io/login", values)
+        .then(function (response) {
+          console.log(response);
+          console.log(values);
+          navigation.navigate("Tab");
+          Alert.alert("안녕하세요 나랭님~");
+          //유저 닉네임 저장
+          AsyncStorage.setItem("nickname", response.data[1], () => {
+            console.log("유저 닉네임 저장 완료");
+          });
+          AsyncStorage.setItem("user_id", response.data[0], () => {
+            console.log("유저 닉네임 저장 완료");
+          });
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert("로그인 실패");
+        });
+    }, 100);
   };
 
   return (
