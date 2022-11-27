@@ -127,12 +127,13 @@ export default function ProductModal({
       }}
     >
       <Contianer>
-        <ProdImage source={product.img}></ProdImage>
         <ProdTitleBox>
           <ProdTitle>{product.krName} 작동 설정</ProdTitle>
         </ProdTitleBox>
+        <ProdImage source={product.img}></ProdImage>
+        <Line />
         {product.func?.map((funcs, index) => (
-          <>
+          <TestContainer>
             <ProdFunc key={index}>{funcs}</ProdFunc>
             {funcs === "전원 ON/OFF" ||
             funcs === "브리핑" ||
@@ -155,15 +156,18 @@ export default function ProductModal({
                 data={pickDatas(funcs)}
                 defaultButtonText={pickDefault(funcs)}
                 buttonTextStyle={{
-                  color: "#30a874",
+                  color: "#4a4a4a",
                   fontWeight: "600",
+                  fontSize: "15",
                 }}
                 buttonStyle={{
-                  borderRadius: 10,
+                  width: 150,
+                  borderRadius: 20,
                   fontSize: 18,
-                  alignSelf: "flex-start",
+                  // alignSelf: "flex-start",
+                  alignSelf: "center",
                   marginBottom: 15,
-                  backgroundColor: "#f3f3f3",
+                  backgroundColor: "#f8f8f8",
                   height: 40,
                 }}
                 onSelect={(selectedItem, idx) => {
@@ -184,16 +188,24 @@ export default function ProductModal({
                 onChangeText={(text) => setDetail(text, index)}
               />
             )}
-          </>
+          </TestContainer>
         ))}
+      </Contianer>
+      <Footer>
         <SubmitBtn onPress={settingComplete}>
           <SubmitText>설정 완료</SubmitText>
         </SubmitBtn>
-      </Contianer>
+      </Footer>
     </Modal>
   );
 }
 
+const Line = styled.View`
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+  margin-bottom: 10px;
+`;
 const Contianer = styled.ScrollView`
   display: flex;
   flex-direction: column;
@@ -210,54 +222,95 @@ const ProdImage = styled.Image`
 
 const ProdTitleBox = styled.View`
   background-color: #daeae2;
+  /* background-color: #66cc99; */
+
   border-radius: 20px;
-  width: 200px;
+  /* width: 200px; */
+  /* padding: 20px; */
+  padding-left: 20px;
+  padding-right: 20px;
   height: 40px;
   align-self: center;
-  margin-bottom: 30px;
+  margin-top: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
 const ProdTitle = styled.Text`
-  font-size: 20rem;
+  font-size: 17rem;
   font-weight: bold;
+  /* color: #2d2d2d; */
+  /* color: white; */
 `;
 
 const ProdFunc = styled.Text`
   font-size: 15rem;
+  width: 100;
   font-weight: bold;
-  align-self: flex-start;
+  align-self: center;
   margin-bottom: 20px;
 `;
 
 const InputBox = styled.TextInput`
   font-size: 15rem;
   font-weight: bold;
-  align-self: flex-start;
+  /* align-self: flex-start; */
+  align-self: center;
+
   margin-bottom: 20px;
-  border-radius: 10px;
-  border: 2px solid #dedede;
-  width: 200px;
+  border-radius: 15px;
+  border: 1.6px solid #e5e5e5;
+  width: 150px;
   height: 40px;
   padding: 8px;
 `;
 
 const SubmitBtn = styled.TouchableOpacity`
-  width: 200px;
+  width: 300px;
   height: 40px;
-  background-color: #daeae2;
-  margin-top: 20px;
-  margin-bottom: 150px;
-  align-self: center;
+  background-color: #66cc99;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+  /* align-self: center; */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 20px;
 `;
 const SubmitText = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  /* color: gray; */
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+`;
+
+const TestContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* border: 1px solid black; */
+  /* border-bottom-color: #eeeeee;
+  border-bottom-width: 1; */
+  /* border-bottom: 1px solid red; */
+  /* border: 1px solid #d6d6d6; */
+`;
+
+const Footer = styled.View`
+  background-color: #ffffff;
+  shadow-color: #d8d8d8;
+  shadow-offset: {
+    width: 0;
+    height: 2;
+  }
+  shadow-opacity: 0.4;
+  shadow-radius: 3px;
+  elevation: 2;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

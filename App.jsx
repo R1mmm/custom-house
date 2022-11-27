@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./components/login/Login.jsx";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,38 +7,75 @@ import TabNav from "./components/TabNav.jsx";
 import CustomRoutine from "./components/customRoutine/CustomRoutine.jsx";
 import SignUp from "./components/signup/SignUp.jsx";
 import { RecoilRoot } from "recoil";
+import Loading from "./Loading.jsx";
+import * as SplashScreen from "expo-splash-screen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  return (
-    <RecoilRoot>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            options={{ headerShown: false, animationEnabled: false }}
-            name="Login"
-            screenOptions={{
-              gestureEnabled: false, //뒤로 가기 막기
-            }}
-            component={Login}
-          />
-          <Stack.Screen
-            options={{ headerShown: false, animationEnabled: false }}
-            name="Tab"
-            component={TabNav}
-          />
-          <Stack.Screen
-            options={{ headerShown: false, animationEnabled: false }}
-            name="RoutineCustomize"
-            component={CustomRoutine}
-          />
-          <Stack.Screen
-            options={{ headerShown: false, animationEnabled: false }}
-            name="SignUp"
-            component={SignUp}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </RecoilRoot>
-  );
+  // const [userId, setUserId] = useState("");
+  // const [isLogin, setIsLogin] = useState(false);
+
+  // AsyncStorage.getItem("user_id", (err, result) => {
+  //   setUserId(result);
+  // });
+  // console.log(userId);
+
+  // useEffect(() => {
+  //   if (userId !== "") {
+  //     setIsLogin(true);
+  //   }
+  // }, [userId, setUserId]);
+
+  // useEffect(() => {
+  //   navigation.navigate("Tab");
+  // }, [setIsLogin, isLogin]);
+  const [appIsReady, setAppIsReady] = useState(true);
+
+  useEffect(() => {
+    // 1,000가 1초
+    setTimeout(() => {
+      setAppIsReady(false);
+    }, 3000);
+  }, []);
+
+  if (appIsReady) {
+    return <Loading />;
+  } else {
+    return (
+      <RecoilRoot>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen
+              options={{ headerShown: false, animationEnabled: false }}
+              name="Login"
+              screenOptions={{
+                gestureEnabled: false, //뒤로 가기 막기
+              }}
+              component={Login}
+            />
+            <Stack.Screen
+              options={{
+                headerShown: false,
+                animationEnabled: false,
+                gestureEnabled: false,
+              }}
+              name="Tab"
+              component={TabNav}
+            />
+            <Stack.Screen
+              options={{ headerShown: false, animationEnabled: false }}
+              name="RoutineCustomize"
+              component={CustomRoutine}
+            />
+            <Stack.Screen
+              options={{ headerShown: false, animationEnabled: false }}
+              name="SignUp"
+              component={SignUp}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </RecoilRoot>
+    );
+  }
 }

@@ -9,3 +9,6 @@ export { default as styler } from "./styler.png";
 export { default as conditioner } from "./conditioner.png";
 export { default as TV } from "./TV.png";
 export { default as cleaner } from "./cleaner.png";
+
+export { default as splash } from "./splash.png";
+export { default as LGlogo } from "./LGlogo.png";

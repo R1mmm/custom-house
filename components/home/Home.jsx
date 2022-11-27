@@ -1,21 +1,54 @@
-import { Text, View, StyleSheet, Image } from "react-native";
-import React, { useState } from "react";
+import { Text, View, StyleSheet, Image, Alert } from "react-native";
+import React, { useEffect, useState } from "react";
 import "react-native-gesture-handler";
 import homeImg from "../../assets/home-chr.png";
 import HighlightText from "react-native-highlight-underline-text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+import styled from "styled-components";
+import { LGlogo } from "../../assets";
 
 export default function Home() {
   const [userName, setUserName] = useState("");
-  //유저 닉네임 불러오기
+  const [userId, setUserId] = useState("");
+  const [userRoutine, setUserRoutine] = useState([]);
+
   AsyncStorage.getItem("nickname", (err, result) => {
-    console.log(result); // User1 출력
     setUserName(result);
   });
+  AsyncStorage.getItem("user_id", (err, result) => {
+    setUserId(result);
+  });
+
+  useEffect(() => {
+    console.log(userRoutine);
+  }, [userRoutine]);
+
+  useEffect(() => {
+    if (userId !== "") {
+      setTimeout(() => {
+        axios
+          .get(`https://15eb-116-44-106-196.jp.ngrok.io/routine/${userId}`)
+          .then(function (response) {
+            console.log(response);
+            setUserRoutine(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+            // Alert.alert("정보 가져오기 실패");
+          });
+      }, 100);
+    }
+  }, [userId]);
+
   return (
     <View style={styles.container}>
       <View style={styles.logoBox}>
-        <Text style={styles.logoText}>Custom House</Text>
+        {/* <Text style={styles.logoText}>Custom House</Text> */}
+        <Image
+          style={styles.logoText}
+          source={LGlogo}
+        ></Image>
       </View>
       <View style={styles.mainBox}>
         <View style={styles.headerBox}>
@@ -43,24 +76,31 @@ export default function Home() {
         {/* <View style={styles.divider}></View> */}
         <View style={styles.routinBox}>
           <Text style={styles.routinText}>
-            <Text style={{ color: "#66CC99" }}>나림</Text>
+            <Text style={{ color: "#66CC99" }}>{userName}</Text>
             님이 적용중인 루틴이에요
           </Text>
+
           <View style={styles.routinListBox}>
-            <Text style={styles.routinListText}>방 청소하기</Text>
-            <Text style={styles.routinListText}>방해되는 요소 차단</Text>
-            <Text style={styles.routinListText}>깨끗한 공기</Text>
+            {userRoutine.length === 0 ? (
+              <RoutinListText style={{ color: "#b9b9b9" }}>
+                적용중인 루틴이 없어요
+              </RoutinListText>
+            ) : (
+              userRoutine.map((Item, idx) => (
+                <RoutinListText>{Item}</RoutinListText>
+              ))
+            )}
           </View>
         </View>
         <View style={styles.routinBox}>
           <Text style={styles.routinText}>
-            <Text style={{ color: "#66CC99" }}>나림</Text>
+            <Text style={{ color: "#66CC99" }}>{userName}</Text>
             님이 현재 실행중인 제품이에요
           </Text>
           <View style={styles.routinListBox}>
-            <Text style={styles.routinListText}>LG 트롬 건조기</Text>
-            <Text style={styles.routinListText}>대박 짱 큰 티비</Text>
-            <Text style={styles.routinListText}>공기청정기</Text>
+            <RoutinListText>LG 트롬 건조기</RoutinListText>
+            <RoutinListText>대박 짱 큰 티비</RoutinListText>
+            <RoutinListText>공기청정기</RoutinListText>
           </View>
         </View>
       </View>
@@ -83,10 +123,12 @@ const styles = StyleSheet.create({
     padding: "3%",
   },
   logoText: {
-    color: "#FFFFFF",
-    fontWeight: "bold",
-    marginLeft: "10%",
-    fontSize: "20",
+    width: "55%",
+    height: "25%",
+    width: 120,
+    height: 20,
+    marginLeft: "5%",
+    // fontSize: "20",
   },
   mainBox: {
     flexGrow: "4",
@@ -94,7 +136,8 @@ const styles = StyleSheet.create({
     height: "80%",
     backgroundColor: "#FFFFFF",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "space-around",
+    // justifyContent: "space-around",
     boxShadow: "0px -5px 4px 0px rgba(143, 143, 143, 0.25)",
     borderTopRightRadius: "30px",
     borderTopLeftRadius: "30px",
@@ -106,11 +149,11 @@ const styles = StyleSheet.create({
     marginBottom: "5%",
   },
   textBox: {
-    marginTop: "30%",
+    marginTop: "25%",
   },
   image: {
-    width: 170,
-    height: 170,
+    width: 150,
+    height: 150,
   },
   divider: {
     height: 2,
@@ -119,7 +162,7 @@ const styles = StyleSheet.create({
     marginBottom: "3%",
   },
   routinBox: {
-    height: "30%",
+    // height: "30%",
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -133,7 +176,7 @@ const styles = StyleSheet.create({
   },
   routinListBox: {
     marginTop: "5%",
-    height: "80%",
+    // height: "80%",
     width: "100%",
     justifyContent: "space-between",
     backgroundColor: "#F8F8F8",
@@ -144,5 +187,15 @@ const styles = StyleSheet.create({
   routinListText: {
     color: "black",
     fontWeight: "700",
+    marginBottom: 20,
   },
 });
+
+const RoutinListText = styled.Text`
+  color: black;
+  font-weight: 700;
+  /* margin-bottom: 20; */
+  :not(:last-child) {
+    margin-bottom: 20;
+  }
+`;

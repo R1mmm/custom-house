@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -15,6 +15,21 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
+  const [userId, setUserId] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+
+  AsyncStorage.getItem("user_id", (err, result) => {
+    setUserId(result);
+  });
+
+  console.log(userId);
+
+  useEffect(() => {
+    if (userId !== "") {
+      navigation.navigate("Tab");
+    }
+  }, [userId, setUserId]);
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   // const [socialModalVisible, setSocialModalVisible] = useState(false);
@@ -37,7 +52,7 @@ export default function Login({ navigation }) {
     };
     setTimeout(function () {
       axios
-        .post("https://812d-218-235-241-52.jp.ngrok.io/login", values)
+        .post("https://15eb-116-44-106-196.jp.ngrok.io/login", values)
         .then(function (response) {
           console.log(response);
           console.log(values);
@@ -48,7 +63,7 @@ export default function Login({ navigation }) {
             console.log("유저 닉네임 저장 완료");
           });
           AsyncStorage.setItem("user_id", response.data[0], () => {
-            console.log("유저 닉네임 저장 완료");
+            console.log("유저 ID 저장 완료");
           });
         })
         .catch(function (error) {
