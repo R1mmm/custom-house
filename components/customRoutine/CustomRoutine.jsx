@@ -93,6 +93,15 @@ export default function CustomRoutine({ navigation }) {
         prod_obj={products}
         setProductsList={setProductsList}
       />
+      <Ionicons
+        onPress={() => navigation.goBack()}
+        style={{ marginTop: 30, left: -10 }}
+        name="ios-chevron-back-outline"
+        size={24}
+        color="black"
+      />
+      <PageTitle>커스텀 루틴 만들기</PageTitle>
+      <Line></Line>
       <Text style={styles.selectProd}>가전 제품 선택</Text>
       <View style={styles.productContainer}>
         {ProductData.map((product, index) => (
@@ -110,52 +119,64 @@ export default function CustomRoutine({ navigation }) {
           </IconBox>
         ))}
       </View>
-      <SettingTitle>루틴 이름 설정</SettingTitle>
-      <SettingInput
-        onChangeText={(text) => setRoutineName(text)}
-      ></SettingInput>
-      <SettingTitle>명령 유형 선택</SettingTitle>
-      <SelectDropdown
-        data={["명령어", "시간"]}
-        defaultButtonText="선택"
-        buttonTextStyle={{
-          color: "#30a874",
-          fontWeight: "600",
-        }}
-        buttonStyle={{
-          borderRadius: 10,
-          fontSize: 18,
-          alignSelf: "flex-start",
-          marginTop: 15,
-          backgroundColor: "#f3f3f3",
-          height: 40,
-        }}
-        onSelect={(selectedItem, idx) => {
-          setCommandType(selectedItem);
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          return selectedItem;
-        }}
-        rowTextForSelection={(item, index) => {
-          return item;
-        }}
-      />
-      {commandType == "명령어" ? (
-        <>
+      <MainBox>
+        <SettingTitle>루틴 이름</SettingTitle>
+        <SettingInput
+          onChangeText={(text) => setRoutineName(text)}
+        ></SettingInput>
+      </MainBox>
+      <MainBox>
+        <SettingTitle>명령 유형</SettingTitle>
+        <SelectDropdown
+          data={["명령어", "시간"]}
+          defaultButtonText="선택"
+          buttonTextStyle={{
+            color: "#4a4a4a",
+            fontWeight: "600",
+            fontSize: "15",
+          }}
+          buttonStyle={{
+            width: 150,
+            borderRadius: 20,
+            fontSize: 18,
+            marginLeft: 50,
+            // alignSelf: "flex-start",
+            alignSelf: "center",
+            // marginBottom: 15,
+            backgroundColor: "#f8f8f8",
+            height: 40,
+          }}
+          onSelect={(selectedItem, idx) => {
+            setCommandType(selectedItem);
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            return selectedItem;
+          }}
+          rowTextForSelection={(item, index) => {
+            return item;
+          }}
+        />
+      </MainBox>
+      {commandType == "명령어" && (
+        <MainBox>
           <SettingTitle>명령어 설정</SettingTitle>
           <SettingInput
             onChangeText={(text) => setCommand(text)}
           ></SettingInput>
-        </>
-      ) : (
-        <>
+        </MainBox>
+      )}
+      {commandType == "시간" && (
+        <MainBox>
           <SettingTitle>시간 설정</SettingTitle>
           <SettingInput onChangeText={(text) => setTimer(text)}></SettingInput>
-        </>
+        </MainBox>
       )}
-      <SubmitBtn onPress={createCustomRtn}>
-        <SubmitText>루틴 생성하기</SubmitText>
-      </SubmitBtn>
+      <Footer>
+        <Line />
+        <SubmitBtn onPress={createCustomRtn}>
+          <SubmitText>루틴 생성하기</SubmitText>
+        </SubmitBtn>
+      </Footer>
     </ScrollView>
   );
 }
@@ -169,9 +190,10 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   selectProd: {
-    marginTop: 100,
+    marginTop: 20,
     fontSize: 15,
     fontWeight: "700",
+    color: "#464646",
   },
   productContainer: {
     flexDirection: "row",
@@ -207,33 +229,72 @@ const IconBox = styled.TouchableOpacity`
 const SettingTitle = styled.Text`
   font-size: 15px;
   font-weight: bold;
-  margin-top: 15px;
+  color: #464646;
+
+  /* margin-top: 15px; */
+  width: 100px;
+  /* align-self: center; */
 `;
 
 const SettingInput = styled.TextInput`
   font-size: 15px;
   font-weight: bold;
-  margin-top: 15px;
-  width: 200px;
-  border: 2px solid #cecece;
+  /* margin-top: 15px; */
   border-radius: 10px;
-  padding: 10px;
+  border: 1.6px solid #e5e5e5;
+  width: 200px;
+  height: 40px;
+  padding: 8px;
 `;
 
 const SubmitBtn = styled.TouchableOpacity`
-  width: 200px;
-  height: 50px;
-  background-color: #daeae2;
-  margin-top: 50px;
-  margin-bottom: 150px;
+  width: 300px;
+  height: 45px;
+  background-color: #66cc99;
+  margin-top: 20px;
+  /* margin-bottom: 150px; */
   align-self: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 30px;
 `;
 const SubmitText = styled.Text`
-  font-size: 20px;
-  font-weight: bold;
-  color: #474747;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+`;
+
+const MainBox = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  /* border: 1px solid black; */
+  /* padding: 15px; */
+`;
+
+const Line = styled.View`
+  width: 100%;
+  height: 1px;
+  background-color: #e5e5e5;
+  margin-top: 10px;
+`;
+
+const PageTitle = styled.Text`
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #262626;
+`;
+
+const Footer = styled.View`
+  height: 120px;
+  top: 620px;
+  position: absolute;
+  justify-content: flex-end;
+  display: flex;
 `;

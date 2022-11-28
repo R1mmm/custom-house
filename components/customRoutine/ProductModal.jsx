@@ -15,8 +15,6 @@ import styled, { css } from "styled-components/native";
 import { prodList } from "../atom";
 import { useRecoilState } from "recoil";
 
-const power = ["ON", "OFF"];
-
 export default function ProductModal({
   setIsModalVisible,
   isModalVisible,
@@ -61,6 +59,8 @@ export default function ProductModal({
 
   const pickDatas = (func) => {
     switch (func) {
+      case "화구":
+        return ["화구1", "화구2", "화구3", "화구4"];
       case "세탁 모드":
         return ["표준", "울코스"];
       case "바람 세기":
@@ -112,6 +112,8 @@ export default function ProductModal({
         return "온도 설정";
       case "타이머 설정":
         return "설정";
+      case "화구":
+        return "설정";
       default:
         return "ON/OFF";
     }
@@ -135,9 +137,9 @@ export default function ProductModal({
         {product.func?.map((funcs, index) => (
           <TestContainer>
             <ProdFunc key={index}>{funcs}</ProdFunc>
-            {funcs === "전원 ON/OFF" ||
+            {funcs === "전원" ||
             funcs === "브리핑" ||
-            funcs === "화구 ON/OFF" ||
+            funcs === "화구" ||
             funcs === "절약 건조" ||
             funcs === "구김방지여부" ||
             funcs === "보관 여부" ||
@@ -211,19 +213,23 @@ const Contianer = styled.ScrollView`
   flex-direction: column;
   height: 100%;
   align-content: center;
-  padding: 40px 40px 40px 40px;
+  padding: 10px 40px 40px 40px;
+  /* background-color: red; */
+  /* background: linear-gradient(
+    180deg,
+    #f3fdf8 0%,
+    rgba(177, 230, 203, 0.528002) 0.65%,
+    rgba(102, 204, 153, 0) 12.84%
+  ); */
 `;
 
 const ProdImage = styled.Image`
-  width: 200px;
-  height: 200px;
+  width: 240px;
+  height: 240px;
   align-self: center;
 `;
 
 const ProdTitleBox = styled.View`
-  background-color: #daeae2;
-  /* background-color: #66cc99; */
-
   border-radius: 20px;
   /* width: 200px; */
   /* padding: 20px; */
@@ -238,15 +244,15 @@ const ProdTitleBox = styled.View`
 `;
 
 const ProdTitle = styled.Text`
-  font-size: 17rem;
+  font-size: 20rem;
   font-weight: bold;
-  /* color: #2d2d2d; */
-  /* color: white; */
+  color: #373737;
 `;
 
 const ProdFunc = styled.Text`
   font-size: 15rem;
   width: 100;
+  color: #373737;
   font-weight: bold;
   align-self: center;
   margin-bottom: 20px;

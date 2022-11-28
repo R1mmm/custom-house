@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import styled from "styled-components";
 import { LGlogo } from "../../assets";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function Home() {
   const [userName, setUserName] = useState("");
@@ -42,9 +43,14 @@ export default function Home() {
   }, [userId]);
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      start={{ x: 0.3, y: 0.1 }}
+      end={{ x: 3.0, y: 1.0 }}
+      locations={[0, 0.1]}
+      colors={["#66d894", "#57bd70"]}
+      style={styles.container}
+    >
       <View style={styles.logoBox}>
-        {/* <Text style={styles.logoText}>Custom House</Text> */}
         <Image
           style={styles.logoText}
           source={LGlogo}
@@ -57,14 +63,14 @@ export default function Home() {
               isFixed
               underlineSize={10}
               underlineColor="#66CC99"
-              textStyle={{ fontSize: 30, fontWeight: "900" }}
+              textStyle={{ fontSize: 30, fontWeight: "800", color: "#202020" }}
               text={`${userName}님,`}
             />
             <HighlightText
               isFixed
               underlineSize={10}
               underlineColor="#66CC99"
-              textStyle={{ fontSize: 30, fontWeight: "900" }}
+              textStyle={{ fontSize: 30, fontWeight: "800", color: "#202020" }}
               text="안녕하세요"
             />
           </View>
@@ -104,7 +110,7 @@ export default function Home() {
           </View>
         </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 }
 
@@ -177,15 +183,16 @@ const styles = StyleSheet.create({
   routinListBox: {
     marginTop: "5%",
     // height: "80%",
+    flexGrow: 1,
     width: "100%",
     justifyContent: "space-between",
     backgroundColor: "#F8F8F8",
     boxShadow: "0px 4px 4px rgba(205, 205, 205, 0.25)",
     borderRadius: "10",
-    padding: "9%",
+    padding: "7% 9% 7% 9%",
   },
   routinListText: {
-    color: "black",
+    color: "red",
     fontWeight: "700",
     marginBottom: 20,
   },
@@ -193,8 +200,8 @@ const styles = StyleSheet.create({
 
 const RoutinListText = styled.Text`
   color: black;
-  font-weight: 700;
-  /* margin-bottom: 20; */
+  font-weight: 600;
+  margin: 5px 0px 5px 0px;
   :not(:last-child) {
     margin-bottom: 20;
   }

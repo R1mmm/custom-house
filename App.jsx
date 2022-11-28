@@ -8,7 +8,6 @@ import CustomRoutine from "./components/customRoutine/CustomRoutine.jsx";
 import SignUp from "./components/signup/SignUp.jsx";
 import { RecoilRoot } from "recoil";
 import Loading from "./Loading.jsx";
-import * as SplashScreen from "expo-splash-screen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
