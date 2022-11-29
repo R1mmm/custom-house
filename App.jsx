@@ -8,14 +8,22 @@ import CustomRoutine from "./components/customRoutine/CustomRoutine.jsx";
 import SignUp from "./components/signup/SignUp.jsx";
 import { RecoilRoot } from "recoil";
 import Loading from "./Loading.jsx";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as Font from "expo-font";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-
+  const [fontLoad, setFontLoad] = useState(false);
   const [appIsReady, setAppIsReady] = useState(true);
 
   useEffect(() => {
+    const Load = async () => {
+      await Font.loadAsync({
+        nanum: require("./assets/fonts/NanumSquareRoundR.ttf"),
+        // test: require("./assets/fonts/UhBeeSehyun.ttf"),
+      });
+      setFontLoad(true);
+    };
+    Load();
     // 1,000가 1초
     setTimeout(() => {
       setAppIsReady(false);
@@ -24,7 +32,7 @@ export default function App() {
 
   if (appIsReady) {
     return <Loading />;
-  } else {
+  } else if (fontLoad && appIsReady == false) {
     return (
       <RecoilRoot>
         <NavigationContainer>

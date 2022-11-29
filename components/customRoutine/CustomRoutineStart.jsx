@@ -1,5 +1,6 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
+import Text from "../utils/text";
 
 export default function CustomRoutineStart({ navigation }) {
   return (

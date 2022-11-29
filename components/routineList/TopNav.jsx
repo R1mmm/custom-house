@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Age from "./Age";
 import Gender from "./Gender";
 import Household from "./Household";
+import Text from "../utils/text";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 export default function TopNav() {

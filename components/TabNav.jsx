@@ -3,7 +3,7 @@ import TopNav from "./routineList/TopNav";
 import CustomRoutineStart from "./customRoutine/CustomRoutineStart";
 import MyPage from "./myPage/MyPage";
 import React from "react";
-import { Text } from "react-native";
+import Text from "../components/utils/text";
 import "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";

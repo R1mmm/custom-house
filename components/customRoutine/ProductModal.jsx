@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Alert,
   Modal,
-  Text,
   View,
   StyleSheet,
   Image,
@@ -10,9 +9,10 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
+import Text from "../utils/text";
 import SelectDropdown from "react-native-select-dropdown";
 import styled, { css } from "styled-components/native";
-import { prodList } from "../atom";
+import { prodList } from "../utils/atom";
 import { useRecoilState } from "recoil";
 
 export default function ProductModal({
@@ -298,11 +298,6 @@ const TestContainer = styled.View`
   justify-content: center;
   align-items: center;
   width: 100%;
-  /* border: 1px solid black; */
-  /* border-bottom-color: #eeeeee;
-  border-bottom-width: 1; */
-  /* border-bottom: 1px solid red; */
-  /* border: 1px solid #d6d6d6; */
 `;
 
 const Footer = styled.View`

@@ -1,12 +1,12 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
 import RoutineModal from "./RoutineModal";
+import Text from "../utils/text";
 import React, { useState } from "react";
 import testImage from "../../assets/test_image.png";
 

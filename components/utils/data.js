@@ -8,7 +8,7 @@ import {
   conditioner,
   TV,
   cleaner,
-} from "../assets/index";
+} from "../../assets/index";
 
 const ProductData = [
   {

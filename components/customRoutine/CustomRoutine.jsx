@@ -1,6 +1,5 @@
 import {
   View,
-  Text,
   StyleSheet,
   Image,
   TouchableOpacity,
@@ -11,12 +10,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import styled, { css } from "styled-components/native";
-import ProductData from "../data";
+import ProductData from "../utils/data.js";
 import ProductModal from "./ProductModal";
-import { prodList } from "../atom";
+import { prodList } from "../utils/atom";
 import { useRecoilState } from "recoil";
 import SelectDropdown from "react-native-select-dropdown";
 import axios from "axios";
+import Text from "../utils/text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function CustomRoutine({ navigation }) {
@@ -230,6 +230,7 @@ const SettingTitle = styled.Text`
   font-size: 15px;
   font-weight: bold;
   color: #464646;
+  font-family: "nanum";
 
   /* margin-top: 15px; */
   width: 100px;
@@ -263,6 +264,7 @@ const SubmitText = styled.Text`
   font-size: 18px;
   font-weight: 600;
   color: #ffffff;
+  font-family: "nanum";
 `;
 
 const MainBox = styled.View`
@@ -289,6 +291,7 @@ const PageTitle = styled.Text`
   margin-top: 20px;
   margin-bottom: 10px;
   color: #262626;
+  font-family: "nanum";
 `;
 
 const Footer = styled.View`
