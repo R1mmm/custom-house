@@ -12,23 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
-  // const [userId, setUserId] = useState("");
-  // const [isLogin, setIsLogin] = useState(false);
 
-  // AsyncStorage.getItem("user_id", (err, result) => {
-  //   setUserId(result);
-  // });
-  // console.log(userId);
-
-  // useEffect(() => {
-  //   if (userId !== "") {
-  //     setIsLogin(true);
-  //   }
-  // }, [userId, setUserId]);
-
-  // useEffect(() => {
-  //   navigation.navigate("Tab");
-  // }, [setIsLogin, isLogin]);
   const [appIsReady, setAppIsReady] = useState(true);
 
   useEffect(() => {
