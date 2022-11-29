@@ -2,6 +2,7 @@ import Home from "./home/Home";
 import TopNav from "./routineList/TopNav";
 import CustomRoutineStart from "./customRoutine/CustomRoutineStart";
 import MyPage from "./myPage/MyPage";
+import HotRoutine from "./hotRoutine/HotRoutine";
 import React from "react";
 import Text from "../components/utils/text";
 import "react-native-gesture-handler";
@@ -109,6 +110,37 @@ export default function TabNav() {
           ),
         }}
         component={CustomRoutineStart}
+      />
+      <Tab.Screen
+        name="TrendingRoutine"
+        options={{
+          tabBarLabel: "트렌드 루틴",
+          title: "TRENDING ROUTINE",
+          headerTitleStyle: {
+            fontWeight: "500",
+            fontSize: 15,
+          },
+          headerShadowVisible: false, // applied here
+          tabBarLabel: ({ focused, color, size }) => (
+            <Text
+              style={{
+                color: focused ? "#66CC99" : "#646464",
+                fontWeight: "bold",
+                fontSize: "10",
+              }}
+            >
+              트렌드 루틴
+            </Text>
+          ),
+          tabBarIcon: ({ focused }) => (
+            <Ionicons
+              style={{ color: focused ? "#66CC99" : "#646464" }}
+              name="ios-flame-sharp"
+              size={25}
+            />
+          ),
+        }}
+        component={HotRoutine}
       />
       <Tab.Screen
         name="MyPage"
