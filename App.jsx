@@ -7,7 +7,7 @@ import TabNav from "./components/TabNav.jsx";
 import CustomRoutine from "./components/customRoutine/CustomRoutine.jsx";
 import SignUp from "./components/signup/SignUp.jsx";
 import { RecoilRoot } from "recoil";
-import Loading from "./Loading.jsx";
+import Loading from "./components/loading/Loading.jsx";
 import * as Font from "expo-font";
 
 export default function App() {

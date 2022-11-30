@@ -1,5 +1,5 @@
 import { View, Text, Image } from "react-native";
-import { splash } from "./assets/index";
+import { splash } from "../../assets/index";
 import React from "react";
 import styled from "styled-components";
 
