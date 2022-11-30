@@ -90,7 +90,7 @@ const RoutineUser = styled.View`
   padding: 10px;
   background: rgba(210, 223, 217, 0.2);
   border: 2px solid #d2dfd9;
-  border-radius: 13px;
+  border-radius: 20px;
 `;
 
 const styles = StyleSheet.create({

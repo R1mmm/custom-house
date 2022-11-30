@@ -89,13 +89,7 @@ export default function Login({ navigation }) {
             placeholder="password"
           ></TextInput>
         </View>
-        {/* {source !== undefined ? (
-          <SocialWebviewModal
-            visible={socialModalVisible}
-            source={source}
-            closeSocialModal={closeSocialModal}
-          />
-        ) : null} */}
+
         <TouchableOpacity
           style={styles.loginBox}
           // onPress={() => navigation.navigate("Tab")}
