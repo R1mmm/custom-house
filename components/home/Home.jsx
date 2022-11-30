@@ -8,6 +8,7 @@ import axios from "axios";
 import styled from "styled-components";
 import Text from "../utils/text";
 import { LGlogo } from "../../assets";
+import baseURL from "../../baseURL";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Home() {
@@ -26,9 +27,8 @@ export default function Home() {
     if (userId !== "") {
       setTimeout(() => {
         axios
-          .get(`https://15eb-116-44-106-196.jp.ngrok.io/routine/${userId}`)
+          .get(`${baseURL}/routine/${userId}`)
           .then(function (response) {
-            console.log(response);
             setUserRoutine(response.data);
           })
           .catch(function (error) {

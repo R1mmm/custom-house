@@ -11,6 +11,7 @@ import {
   Alert,
 } from "react-native";
 import axios from "axios";
+import baseURL from "../../baseURL";
 
 export default function SignUp({ navigation }) {
   const genders = ["남성", "여성"];
@@ -50,7 +51,7 @@ export default function SignUp({ navigation }) {
     }
     const values = {
       username: name,
-      id: id,
+      userId: id,
       password: password,
       gender: gender,
       age: age,
@@ -58,7 +59,7 @@ export default function SignUp({ navigation }) {
     };
     setTimeout(function () {
       axios
-        .post("https://fe50-58-142-81-222.jp.ngrok.io/subs", values)
+        .post(`${baseURL}/new-member`, values)
         .then(function (response) {
           console.log(response);
           console.log(values);

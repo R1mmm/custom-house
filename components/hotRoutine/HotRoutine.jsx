@@ -119,7 +119,7 @@ const RoutineUser = styled.View`
 const styles = StyleSheet.create({
   number: {
     color: "#66CC99",
-    fontFamily: "arial",
+    // fontFamily: "arial",
     fontSize: 25,
     fontWeight: "bold",
     alignSelf: "flex-start",

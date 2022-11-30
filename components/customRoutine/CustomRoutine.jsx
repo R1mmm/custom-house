@@ -18,6 +18,7 @@ import SelectDropdown from "react-native-select-dropdown";
 import axios from "axios";
 import Text from "../utils/text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import baseURL from "../../baseURL.js";
 
 export default function CustomRoutine({ navigation }) {
   const [productsList, setProductsList] = useRecoilState(prodList);
@@ -69,7 +70,7 @@ export default function CustomRoutine({ navigation }) {
 
     setTimeout(function () {
       axios
-        .post("https://812d-218-235-241-52.jp.ngrok.io/new-routine", values)
+        .post(`${baseURL}/new-routine`, values)
         .then(function (response) {
           console.log(response);
           console.log(values);

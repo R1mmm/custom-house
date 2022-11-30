@@ -1,19 +1,57 @@
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import { StyleSheet } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function MyPage() {
+export default function MyPage({ navigation }) {
+  const logout = () => {
+    Alert.alert(
+      "Logout", // 제목
+      "정말 로그아웃하시겠어요?", // 설명
+      [
+        // 버튼 추가
+        { text: "취소", style: "cancel" },
+        {
+          text: "예",
+          style: "destructive", // 버튼 스타일 지정
+          onPress: async () => {
+            try {
+              await AsyncStorage.clear();
+              console.log("냐냐");
+              navigation.navigate("Login");
+            } catch (e) {
+              // 오류 예외 처리
+            }
+          },
+        },
+      ],
+      {
+        // 옵션 추가
+        cancelable: true, // 취소 버튼 활성화
+      }
+    );
+    const clearAsync = async () => {
+      try {
+        await AsyncStorage.clear();
+      } catch (e) {
+        // 오류 예외 처리
+      }
+    };
+  };
   return (
     <View>
-      <View style={styles.listContainer}>
+      <TouchableOpacity style={styles.listContainer}>
         <Text style={styles.listText}>내 정보</Text>
-      </View>
-      <View style={styles.listContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.listContainer}>
         <Text style={styles.listText}>내 루틴 관리하기</Text>
-      </View>
-      <View style={styles.listContainer}>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.listContainer}
+        onPress={() => logout()}
+      >
         <Text style={styles.listText}>로그아웃</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

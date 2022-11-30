@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import Light from "../../assets/house_light.png";
 import axios from "axios";
+import baseURL from "../../baseURL";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Login({ navigation }) {
@@ -25,39 +26,27 @@ export default function Login({ navigation }) {
   console.log(userId);
 
   useEffect(() => {
-    if (userId !== "") {
+    if (userId !== "" && userId !== null) {
       navigation.navigate("Tab");
     }
   }, [userId, setUserId]);
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  // const [socialModalVisible, setSocialModalVisible] = useState(false);
-  // const [source, setSource] = useState("");
-
-  // const onPressSocial = async (social) => {
-  //   setSocialModalVisible(!socialModalVisible);
-  //   setSource(`http://localhost:8080/${social}`);
-  // };
-
-  // const closeSocialModal = async () => {
-  //   setSocialModalVisible(socialModalVisible);
-  // };
 
   const signIn = () => {
     // navigation.navigate("Tab");
     const values = {
-      username: id,
+      userId: id,
       password: password,
     };
     setTimeout(function () {
       axios
-        .post("https://15eb-116-44-106-196.jp.ngrok.io/login", values)
+        .post(`${baseURL}/login`, values)
         .then(function (response) {
           console.log(response);
           console.log(values);
-          navigation.navigate("Tab");
-          Alert.alert("안녕하세요 나랭님~");
+          Alert.alert(`안녕하세요 ${response.data[1]}님!`);
           //유저 닉네임 저장
           AsyncStorage.setItem("nickname", response.data[1], () => {
             console.log("유저 닉네임 저장 완료");
@@ -65,6 +54,7 @@ export default function Login({ navigation }) {
           AsyncStorage.setItem("user_id", response.data[0], () => {
             console.log("유저 ID 저장 완료");
           });
+          navigation.navigate("Tab");
         })
         .catch(function (error) {
           console.log(error);
