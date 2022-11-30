@@ -1,74 +1,51 @@
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Text from "../utils/text";
 import styled from "styled-components";
+import baseURL from "../../baseURL";
+import axios from "axios";
 
 export default function HotRoutine() {
+  const [trendingRoutines, setTrendingRoutines] = useState([]);
+
+  const getRoutines = async () => {
+    await axios
+      .get(`${baseURL}/trending-routines`)
+      .then(function (response) {
+        setTrendingRoutines(response.data);
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    getRoutines();
+  }, []);
   return (
     <Root>
-      <RoutineBox>
-        <Text style={styles.number}>1</Text>
-        <RoutineTitle>
-          <Text style={{ fontSize: "16" }}>방해되는 요소 차단</Text>
-          <RoutinePodcs>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>티비</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>에어컨</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>라디오</Text>
-            </View>
-          </RoutinePodcs>
-        </RoutineTitle>
-        <RoutineUser>
-          <Text style={{ fontSize: "12" }}>by 조소연</Text>
-          <Text style={{ fontSize: "12" }}>1021</Text>
-        </RoutineUser>
-      </RoutineBox>
-      <RoutineBox>
-        <Text style={styles.number}>2</Text>
-        <RoutineTitle>
-          <Text style={{ fontSize: "16" }}>방해되는 요소 차단</Text>
-          <RoutinePodcs>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>티비</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>에어컨</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>라디오</Text>
-            </View>
-          </RoutinePodcs>
-        </RoutineTitle>
-        <RoutineUser>
-          <Text style={{ fontSize: "12" }}>by 조소연</Text>
-          <Text style={{ fontSize: "12" }}>1021</Text>
-        </RoutineUser>
-      </RoutineBox>
-      <RoutineBox>
-        <Text style={styles.number}>3</Text>
-        <RoutineTitle>
-          <Text style={{ fontSize: "16" }}>방해되는 요소 차단</Text>
-          <RoutinePodcs>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>티비</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>에어컨</Text>
-            </View>
-            <View style={styles.routineProd}>
-              <Text style={{ color: "white", fontSize: "10" }}>라디오</Text>
-            </View>
-          </RoutinePodcs>
-        </RoutineTitle>
-        <RoutineUser>
-          <Text style={{ fontSize: "12" }}>by 조소연</Text>
-          <Text style={{ fontSize: "12" }}>1021</Text>
-        </RoutineUser>
-      </RoutineBox>
+      {trendingRoutines &&
+        trendingRoutines.map((routine, index) => (
+          <RoutineBox>
+            <Text style={styles.number}>{index + 1}</Text>
+            <RoutineTitle>
+              <Text style={{ fontSize: "16" }}>{routine.routineName}</Text>
+              <RoutinePodcs>
+                {routine.appliance.map((prod, index) => (
+                  <View style={styles.routineProd}>
+                    <Text style={{ color: "white", fontSize: "10" }}>
+                      {prod.name}
+                    </Text>
+                  </View>
+                ))}
+              </RoutinePodcs>
+            </RoutineTitle>
+            <RoutineUser>
+              <Text style={{ fontSize: "12" }}>by {routine.userName}</Text>
+              <Text style={{ fontSize: "12" }}>{routine.numberOfDownload}</Text>
+            </RoutineUser>
+          </RoutineBox>
+        ))}
     </Root>
   );
 }
