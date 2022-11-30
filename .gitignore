@@ -11,6 +11,7 @@ npm-debug.*
 web-build/
 assets/fonts/
 baseURL.js
+yarn-error.log
 
 # macOS
 .DS_Store
