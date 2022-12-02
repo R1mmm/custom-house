@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import {
   Alert,
   Modal,
-  Text,
   View,
   StyleSheet,
   Image,
   TouchableOpacity,
 } from "react-native";
+import Text from "../utils/text";
 import detailImg from "../../assets/detail-img.png";
 
 export default function RoutineModal({ setIsModalVisible, isModalVisible }) {

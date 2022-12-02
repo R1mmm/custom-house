@@ -4,6 +4,7 @@ import Login from "./components/login/Login.jsx";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import "react-native-gesture-handler";
 import TabNav from "./components/TabNav.jsx";
+import MyRoutine from "./components/myPage/MyRoutine.jsx";
 import CustomRoutine from "./components/customRoutine/CustomRoutine.jsx";
 import SignUp from "./components/signup/SignUp.jsx";
 import { RecoilRoot } from "recoil";
@@ -58,6 +59,11 @@ export default function App() {
               options={{ headerShown: false, animationEnabled: false }}
               name="RoutineCustomize"
               component={CustomRoutine}
+            />
+            <Stack.Screen
+              options={{ headerShown: false, animationEnabled: false }}
+              name="MyRoutine"
+              component={MyRoutine}
             />
             <Stack.Screen
               options={{ headerShown: false, animationEnabled: false }}

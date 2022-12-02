@@ -1,5 +1,6 @@
-import { View, Text, TouchableOpacity, Alert } from "react-native";
+import { View, TouchableOpacity, Alert } from "react-native";
 import React from "react";
+import Text from "../utils/text";
 import { StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -30,20 +31,22 @@ export default function MyPage({ navigation }) {
         cancelable: true, // 취소 버튼 활성화
       }
     );
-    const clearAsync = async () => {
-      try {
-        await AsyncStorage.clear();
-      } catch (e) {
-        // 오류 예외 처리
-      }
-    };
   };
+
   return (
     <View>
-      <TouchableOpacity style={styles.listContainer}>
-        <Text style={styles.listText}>내 정보</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.listContainer}>
+      <View style={styles.myInfo}>
+        <View>
+          <Text style={styles.myInfoText}>내 정보</Text>
+          <Text style={styles.myInfoContent}>이름: 냥경훈</Text>
+          <Text style={styles.myInfoContent}>ID: kitty_gang</Text>
+        </View>
+        <View style={styles.profile}></View>
+      </View>
+      <TouchableOpacity
+        style={styles.listContainer}
+        onPress={() => navigation.navigate("MyRoutine")}
+      >
         <Text style={styles.listText}>내 루틴 관리하기</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -69,5 +72,28 @@ const styles = StyleSheet.create({
   },
   listText: {
     color: "#555555",
+  },
+  myInfo: {
+    height: 200,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    backgroundColor: "white",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ebebeb",
+  },
+  myInfoText: {
+    fontSize: 20,
+    marginBottom: 10,
+  },
+  myInfoContent: {
+    fontSize: 17,
+    marginBottom: 10,
+  },
+  profile: {
+    height: 100,
+    width: 100,
+    backgroundColor: "#ebebeb",
+    borderRadius: 10,
   },
 });

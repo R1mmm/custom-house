@@ -2,7 +2,6 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   TextInput,
@@ -10,6 +9,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import Text from "../utils/text";
 import Light from "../../assets/house_light.png";
 import axios from "axios";
 import baseURL from "../../baseURL";
@@ -71,7 +71,7 @@ export default function Login({ navigation }) {
           style={styles.image}
         />
       </View>
-      <Text style={styles.customHouse}>Custom House</Text>
+      <Text style={styles.customHouse}>내멋대로ㅎLG</Text>
 
       <View style={styles.idAndPw}>
         <View style={styles.inputBox}>
@@ -137,7 +137,9 @@ const styles = StyleSheet.create({
   },
   customHouse: {
     color: "#66CC99",
-    fontSize: 40,
+    fontSize: 35,
+    marginTop: 20,
+    fontWeight: "bold",
   },
   idAndPw: {
     marginTop: 30,

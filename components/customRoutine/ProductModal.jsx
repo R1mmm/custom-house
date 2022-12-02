@@ -247,6 +247,7 @@ const ProdTitle = styled.Text`
   font-size: 20rem;
   font-weight: bold;
   color: #373737;
+  font-family: "nanum";
 `;
 
 const ProdFunc = styled.Text`
@@ -256,6 +257,7 @@ const ProdFunc = styled.Text`
   font-weight: bold;
   align-self: center;
   margin-bottom: 20px;
+  font-family: "nanum";
 `;
 
 const InputBox = styled.TextInput`
@@ -270,6 +272,7 @@ const InputBox = styled.TextInput`
   width: 150px;
   height: 40px;
   padding: 8px;
+  font-family: "nanum";
 `;
 
 const SubmitBtn = styled.TouchableOpacity`
@@ -288,6 +291,7 @@ const SubmitText = styled.Text`
   font-size: 15px;
   font-weight: 600;
   color: #ffffff;
+  font-family: "nanum";
 `;
 
 const TestContainer = styled.View`
