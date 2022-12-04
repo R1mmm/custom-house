@@ -2,6 +2,7 @@ import { View, StyleSheet, Image, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import "react-native-gesture-handler";
 import homeImg from "../../assets/home-chr.png";
+import homeTest from "../../assets/testIcon.png";
 import HighlightText from "react-native-highlight-underline-text";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
     paddingRight: "5%",
     paddingLeft: "5%",
     marginBottom: "5%",
+    boxShadow: "5px 10px 10px rgba(223, 223, 223, 0.25)",
   },
   routinText: {
     fontSize: 15,

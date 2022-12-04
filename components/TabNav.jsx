@@ -29,7 +29,7 @@ export default function TabNav() {
           tabBarLabel: ({ focused, color, size }) => (
             <Text
               style={{
-                color: focused ? "#66CC99" : "#646464",
+                color: focused ? "#66CC99" : "#8c8c8c",
                 fontWeight: "bold",
                 fontSize: "10",
               }}
@@ -39,7 +39,7 @@ export default function TabNav() {
           ),
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#66CC99" : "#646464" }}
+              style={{ color: focused ? "#66CC99" : "#8c8c8c" }}
               name="ios-home"
               size={25}
             />
@@ -61,7 +61,7 @@ export default function TabNav() {
           tabBarLabel: ({ focused, color, size }) => (
             <Text
               style={{
-                color: focused ? "#66CC99" : "#646464",
+                color: focused ? "#66CC99" : "#8c8c8c",
                 fontWeight: "bold",
                 fontSize: "10",
               }}
@@ -72,8 +72,8 @@ export default function TabNav() {
 
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#66CC99" : "#646464" }}
-              name="ios-document-text-outline"
+              style={{ color: focused ? "#66CC99" : "#8c8c8c" }}
+              name="ios-document-text"
               size={25}
             />
           ),
@@ -93,7 +93,7 @@ export default function TabNav() {
           tabBarLabel: ({ focused, color, size }) => (
             <Text
               style={{
-                color: focused ? "#66CC99" : "#646464",
+                color: focused ? "#66CC99" : "#8c8c8c",
                 fontWeight: "bold",
                 fontSize: "10",
               }}
@@ -103,7 +103,7 @@ export default function TabNav() {
           ),
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#66CC99" : "#646464" }}
+              style={{ color: focused ? "#66CC99" : "#8c8c8c" }}
               name="ios-add-circle-sharp"
               size={25}
             />
@@ -124,7 +124,7 @@ export default function TabNav() {
           tabBarLabel: ({ focused, color, size }) => (
             <Text
               style={{
-                color: focused ? "#66CC99" : "#646464",
+                color: focused ? "#66CC99" : "#8c8c8c",
                 fontWeight: "bold",
                 fontSize: "10",
               }}
@@ -134,8 +134,8 @@ export default function TabNav() {
           ),
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#66CC99" : "#646464" }}
-              name="ios-flame-sharp"
+              style={{ color: focused ? "#66CC99" : "#8c8c8c" }}
+              name="ios-flame"
               size={25}
             />
           ),
@@ -156,7 +156,7 @@ export default function TabNav() {
           tabBarLabel: ({ focused, color, size }) => (
             <Text
               style={{
-                color: focused ? "#66CC99" : "#646464",
+                color: focused ? "#66CC99" : "#8c8c8c",
                 fontWeight: "bold",
                 fontSize: "10",
               }}
@@ -166,7 +166,7 @@ export default function TabNav() {
           ),
           tabBarIcon: ({ focused }) => (
             <Ionicons
-              style={{ color: focused ? "#66CC99" : "#646464" }}
+              style={{ color: focused ? "#66CC99" : "#8c8c8c" }}
               name="ios-person-sharp"
               size={25}
             />
