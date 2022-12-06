@@ -2,6 +2,7 @@ import { View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React, { useState } from "react";
 import Text from "../utils/text";
 import chImg from "../../assets/routineMake.png";
+import HighlightText from "react-native-highlight-underline-text";
 import customRoutinePic from "../../assets/customRoutine.png";
 
 export default function CustomRoutineStart({ navigation }) {
@@ -45,7 +46,7 @@ export default function CustomRoutineStart({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
+    backgroundColor: "#f7f7f7",
     alignItems: "center",
     justifyContent: "flex-start",
     width: "100%",
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
   header: {
     width: "100%",
     borderRadius: 35,
-    marginTop: 50,
+    marginTop: 40,
     justifyContent: "space-around",
     alignItems: "center",
   },
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
   },
   customImg: {
     width: 300,
-    height: 300,
+    height: 310,
     margin: 30,
   },
   box: {
