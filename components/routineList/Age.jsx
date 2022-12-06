@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     // alignItems: "",
     width: "100%",
     height: "100%",
+    paddingTop: "5%",
     padding: "10%",
   },
   titleText: {

@@ -12,3 +12,5 @@ export { default as cleaner } from "./cleaner.png";
 
 export { default as splash } from "./splash.png";
 export { default as LGlogo } from "./LGlogo.png";
+
+export { default as customRoutinePic } from "./customRoutine.png";

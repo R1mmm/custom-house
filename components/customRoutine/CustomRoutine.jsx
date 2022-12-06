@@ -6,6 +6,8 @@ import {
   TextInput,
   ScrollView,
   Alert,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -74,111 +76,117 @@ export default function CustomRoutine({ navigation }) {
         .then(function (response) {
           console.log(response);
           console.log(values);
-          // navigation.navigate("Tab");
-          Alert.alert("저장 완료~");
+          navigation.navigate("CustomRoutine");
+          Alert.alert("루틴이 생성됐어요!");
         })
         .catch(function (error) {
           console.log(error);
           Alert.alert("저장 실패~");
         });
     }, 100);
-    console.log(values);
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <ProductModal
-        setIsModalVisible={setIsModalVisible}
-        isModalVisible={isModalVisible}
-        product={selectedProd}
-        prod_obj={products}
-        setProductsList={setProductsList}
-      />
-      <Ionicons
-        onPress={() => navigation.goBack()}
-        style={{ marginTop: 30, left: -10 }}
-        name="ios-chevron-back-outline"
-        size={24}
-        color="black"
-      />
-      <PageTitle>커스텀 루틴 만들기</PageTitle>
-      <Line></Line>
-      <Text style={styles.selectProd}>가전 제품 선택</Text>
-      <View style={styles.productContainer}>
-        {ProductData.map((product, index) => (
-          <IconBox
-            onPress={() => addProducts(product)}
-            name={product.name}
-            selected={productsList?.map((product) => product.name)}
-            key={index}
-          >
-            <Image
-              key={index}
-              source={product.img}
-              style={styles.productImg}
-            ></Image>
-          </IconBox>
-        ))}
-      </View>
-      <MainBox>
-        <SettingTitle>루틴 이름</SettingTitle>
-        <SettingInput
-          onChangeText={(text) => setRoutineName(text)}
-        ></SettingInput>
-      </MainBox>
-      <MainBox>
-        <SettingTitle>명령 유형</SettingTitle>
-        <SelectDropdown
-          data={["명령어", "시간"]}
-          defaultButtonText="선택"
-          buttonTextStyle={{
-            color: "#4a4a4a",
-            fontWeight: "600",
-            fontSize: "15",
-          }}
-          buttonStyle={{
-            width: 150,
-            borderRadius: 20,
-            fontSize: 18,
-            marginLeft: 50,
-            // alignSelf: "flex-start",
-            alignSelf: "center",
-            // marginBottom: 15,
-            backgroundColor: "#f8f8f8",
-            height: 40,
-          }}
-          onSelect={(selectedItem, idx) => {
-            setCommandType(selectedItem);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
+    <KeyboardAvoidingView behavior={"padding"}>
+      <ScrollView style={styles.container}>
+        <ProductModal
+          setIsModalVisible={setIsModalVisible}
+          isModalVisible={isModalVisible}
+          product={selectedProd}
+          prod_obj={products}
+          setProductsList={setProductsList}
         />
-      </MainBox>
-      {commandType == "명령어" && (
+        <Ionicons
+          onPress={() => navigation.goBack()}
+          style={{ marginTop: 30, left: -10 }}
+          name="ios-chevron-back-outline"
+          size={24}
+          color="black"
+        />
+        <PageTitle>커스텀 루틴 만들기</PageTitle>
+        <Line></Line>
+        <Text style={styles.selectProd}>가전 제품 선택</Text>
+        <View style={styles.productContainer}>
+          {ProductData.map((product, index) => (
+            <IconBox
+              onPress={() => addProducts(product)}
+              name={product.name}
+              selected={productsList?.map((product) => product.name)}
+              key={index}
+            >
+              <Image
+                key={index}
+                source={product.img}
+                style={styles.productImg}
+              ></Image>
+            </IconBox>
+          ))}
+        </View>
         <MainBox>
-          <SettingTitle>명령어 설정</SettingTitle>
+          <SettingTitle>루틴 이름</SettingTitle>
           <SettingInput
-            onChangeText={(text) => setCommand(text)}
+            onChangeText={(text) => setRoutineName(text)}
           ></SettingInput>
         </MainBox>
-      )}
-      {commandType == "시간" && (
         <MainBox>
-          <SettingTitle>시간 설정</SettingTitle>
-          <SettingInput onChangeText={(text) => setTimer(text)}></SettingInput>
+          <SettingTitle>명령 유형</SettingTitle>
+          <SelectDropdown
+            data={["명령어", "시간"]}
+            defaultButtonText="선택"
+            buttonTextStyle={{
+              color: "#4a4a4a",
+              fontWeight: "600",
+              fontSize: "15",
+              fontFamily: "nanum",
+              color: "#545454",
+            }}
+            buttonStyle={{
+              width: 150,
+              borderRadius: 20,
+              fontSize: 18,
+              marginLeft: 50,
+              fontFamily: "nanum",
+              // alignSelf: "flex-start",
+              alignSelf: "center",
+              // marginBottom: 15,
+              backgroundColor: "#f8f8f8",
+              height: 40,
+            }}
+            onSelect={(selectedItem, idx) => {
+              setCommandType(selectedItem);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              return item;
+            }}
+          />
         </MainBox>
-      )}
-      <Footer>
-        <Line />
-        <SubmitBtn onPress={createCustomRtn}>
-          <SubmitText>루틴 생성하기</SubmitText>
-        </SubmitBtn>
-      </Footer>
-    </ScrollView>
+        {commandType == "명령어" && (
+          <MainBox>
+            <SettingTitle>명령어 설정</SettingTitle>
+            <SettingInput
+              onChangeText={(text) => setCommand(text)}
+            ></SettingInput>
+          </MainBox>
+        )}
+        {commandType == "시간" && (
+          <MainBox>
+            <SettingTitle>시간 설정</SettingTitle>
+            <SettingInput
+              onChangeText={(text) => setTimer(text)}
+            ></SettingInput>
+          </MainBox>
+        )}
+        <Footer>
+          <Line />
+          <SubmitBtn onPress={createCustomRtn}>
+            <SubmitText>루틴 생성하기</SubmitText>
+          </SubmitBtn>
+        </Footer>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -186,7 +194,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     // justifyContent: "center",
-    padding: 30,
+    paddingTop: 30,
+    paddingLeft: 30,
+    paddingRight: 30,
+    paddingBottom: 0,
     width: "100%",
     height: "100%",
   },
@@ -241,6 +252,8 @@ const SettingTitle = styled.Text`
 const SettingInput = styled.TextInput`
   font-size: 15px;
   font-weight: bold;
+  font-family: "nanum";
+  color: #545454;
   /* margin-top: 15px; */
   border-radius: 10px;
   border: 1.6px solid #e5e5e5;
@@ -296,8 +309,8 @@ const PageTitle = styled.Text`
 `;
 
 const Footer = styled.View`
-  height: 120px;
-  top: 620px;
+  height: 80px;
+  top: 670px;
   position: absolute;
   justify-content: flex-end;
   display: flex;

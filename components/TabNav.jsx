@@ -1,5 +1,6 @@
 import Home from "./home/Home";
 import TopNav from "./routineList/TopNav";
+import Age from "./routineList/Age";
 import CustomRoutineStart from "./customRoutine/CustomRoutineStart";
 import MyPage from "./myPage/MyPage";
 import HotRoutine from "./hotRoutine/HotRoutine";
@@ -78,7 +79,7 @@ export default function TabNav() {
             />
           ),
         }}
-        component={TopNav}
+        component={Age}
       />
       <Tab.Screen
         name="CustomRoutine"

@@ -5,4 +5,9 @@ const prodList = atom({
   default: [],
 });
 
-export { prodList };
+const userId = atom({
+  key: "userId",
+  default: null,
+});
+
+export { prodList, userId };

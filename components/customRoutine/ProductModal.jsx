@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  KeyboardAvoidingView,
 } from "react-native";
 import Text from "../utils/text";
 import SelectDropdown from "react-native-select-dropdown";
@@ -128,71 +129,75 @@ export default function ProductModal({
         setIsModalVisible(!isModalVisible);
       }}
     >
+      {/* <KeyboardAvoidingView behavior={"padding"}> */}
       <Contianer>
-        <ProdTitleBox>
-          <ProdTitle>{product.krName} 작동 설정</ProdTitle>
-        </ProdTitleBox>
-        <ProdImage source={product.img}></ProdImage>
-        <Line />
-        {product.func?.map((funcs, index) => (
-          <TestContainer>
-            <ProdFunc key={index}>{funcs}</ProdFunc>
-            {funcs === "전원" ||
-            funcs === "브리핑" ||
-            funcs === "화구" ||
-            funcs === "절약 건조" ||
-            funcs === "구김방지여부" ||
-            funcs === "보관 여부" ||
-            funcs === "세탁 모드" ||
-            funcs === "헹굼 횟수" ||
-            funcs === "탈수 강도" ||
-            funcs === "물 온도" ||
-            funcs === "건조 모드" ||
-            funcs === "작동 시간" ||
-            funcs === "바람 세기" ||
-            funcs === "희망 온도" ||
-            funcs === "온도 설정" ||
-            funcs === "화력 설정" ||
-            funcs === "타이머 설정" ? (
-              <SelectDropdown
-                data={pickDatas(funcs)}
-                defaultButtonText={pickDefault(funcs)}
-                buttonTextStyle={{
-                  color: "#4a4a4a",
-                  fontWeight: "600",
-                  fontSize: "15",
-                }}
-                buttonStyle={{
-                  width: 150,
-                  borderRadius: 20,
-                  fontSize: 18,
-                  // alignSelf: "flex-start",
-                  alignSelf: "center",
-                  marginBottom: 15,
-                  backgroundColor: "#f8f8f8",
-                  height: 40,
-                }}
-                onSelect={(selectedItem, idx) => {
-                  handleChange(selectedItem, index);
-                }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                  return selectedItem;
-                }}
-                rowTextForSelection={(item, index) => {
-                  return item;
-                }}
-              />
-            ) : (
-              <InputBox
-                key={index}
-                placeholder="원하는 숫자를 입력하세요"
-                keyboardType="numeric"
-                onChangeText={(text) => setDetail(text, index)}
-              />
-            )}
-          </TestContainer>
-        ))}
+        <KeyboardAvoidingView behavior={"padding"}>
+          <ProdTitleBox>
+            <ProdTitle>{product.krName} 작동 설정</ProdTitle>
+          </ProdTitleBox>
+          <ProdImage source={product.img}></ProdImage>
+          <Line />
+          {product.func?.map((funcs, index) => (
+            <TestContainer>
+              <ProdFunc key={index}>{funcs}</ProdFunc>
+              {funcs === "전원" ||
+              funcs === "브리핑" ||
+              funcs === "화구" ||
+              funcs === "절약 건조" ||
+              funcs === "구김방지여부" ||
+              funcs === "보관 여부" ||
+              funcs === "세탁 모드" ||
+              funcs === "헹굼 횟수" ||
+              funcs === "탈수 강도" ||
+              funcs === "물 온도" ||
+              funcs === "건조 모드" ||
+              funcs === "작동 시간" ||
+              funcs === "바람 세기" ||
+              funcs === "희망 온도" ||
+              funcs === "온도 설정" ||
+              funcs === "화력 설정" ||
+              funcs === "타이머 설정" ? (
+                <SelectDropdown
+                  data={pickDatas(funcs)}
+                  defaultButtonText={pickDefault(funcs)}
+                  buttonTextStyle={{
+                    color: "#4a4a4a",
+                    fontWeight: "600",
+                    fontSize: "15",
+                  }}
+                  buttonStyle={{
+                    width: 150,
+                    borderRadius: 20,
+                    fontSize: 18,
+                    // alignSelf: "flex-start",
+                    alignSelf: "center",
+                    marginBottom: 15,
+                    backgroundColor: "#f8f8f8",
+                    height: 40,
+                  }}
+                  onSelect={(selectedItem, idx) => {
+                    handleChange(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    return item;
+                  }}
+                />
+              ) : (
+                <InputBox
+                  key={index}
+                  placeholder="원하는 숫자를 입력하세요"
+                  keyboardType="numeric"
+                  onChangeText={(text) => setDetail(text, index)}
+                />
+              )}
+            </TestContainer>
+          ))}
+        </KeyboardAvoidingView>
       </Contianer>
+      {/* </KeyboardAvoidingView> */}
       <Footer>
         <SubmitBtn onPress={settingComplete}>
           <SubmitText>설정 완료</SubmitText>

@@ -30,7 +30,8 @@ export default function Home() {
         axios
           .get(`${baseURL}/routine/${userId}`)
           .then(function (response) {
-            setUserRoutine(response.data);
+            setUserRoutine(response.data[0]);
+            console.log(response);
           })
           .catch(function (error) {
             console.log(error);

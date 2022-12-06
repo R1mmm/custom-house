@@ -35,32 +35,32 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
 
   const signIn = () => {
-    navigation.navigate("Tab");
+    // navigation.navigate("Tab");
     const values = {
       userId: id,
       password: password,
     };
-    // setTimeout(function () {
-    //   axios
-    //     .post(`${baseURL}/login`, values)
-    //     .then(function (response) {
-    //       console.log(response);
-    //       console.log(values);
-    //       Alert.alert(`안녕하세요 ${response.data[1]}님!`);
-    //       //유저 닉네임 저장
-    //       AsyncStorage.setItem("nickname", response.data[1], () => {
-    //         console.log("유저 닉네임 저장 완료");
-    //       });
-    //       AsyncStorage.setItem("user_id", response.data[0], () => {
-    //         console.log("유저 ID 저장 완료");
-    //       });
-    //       navigation.navigate("Tab");
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //       Alert.alert("로그인 실패");
-    //     });
-    // }, 100);
+    setTimeout(function () {
+      axios
+        .post(`${baseURL}/login`, values)
+        .then(function (response) {
+          console.log(response);
+          console.log(values);
+          Alert.alert(`안녕하세요 ${response.data[1]}님!`);
+          //유저 닉네임 저장
+          AsyncStorage.setItem("nickname", response.data[1], () => {
+            console.log("유저 닉네임 저장 완료");
+          });
+          AsyncStorage.setItem("user_id", response.data[0], () => {
+            console.log("유저 ID 저장 완료");
+          });
+          navigation.navigate("Tab");
+        })
+        .catch(function (error) {
+          console.log(error);
+          Alert.alert("로그인 실패");
+        });
+    }, 100);
   };
 
   return (
