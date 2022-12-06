@@ -9,96 +9,46 @@ import RoutineModal from "./RoutineModal";
 import Text from "../utils/text";
 import React, { useState } from "react";
 import testImage from "../../assets/test_image.png";
+import RecData from "../utils/recData";
 
 export default function Age() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState();
+
   return (
     <>
       <RoutineModal
         setIsModalVisible={setIsModalVisible}
         isModalVisible={isModalVisible}
+        modalContent={modalContent}
       />
       <View style={styles.container}>
         <Text style={styles.titleText}>
-          <Text style={{ color: "#66CC99" }}>나림</Text>
-          님을 위한&nbsp;
-          <Text style={{ color: "#66CC99" }}>20대&nbsp;</Text>
-          추천 루틴
+          <Text style={{ color: "#66CC99" }}>김엘지</Text>
+          님을 위한 추천 루틴
         </Text>
         <ScrollView style={styles.routines}>
-          <TouchableOpacity
-            style={styles.routineBox}
-            onPress={() => setIsModalVisible(true)}
-          >
-            <View style={styles.routineIntro}>
-              <View style={styles.routineTitle}>
-                <Text style={styles.routineTitleText}>방해되는 요소 차단</Text>
-              </View>
-              <Text style={styles.routineDesc}>
-                아무에게도 방해받기 싫으시죠?
-              </Text>
-            </View>
-            <Image
-              source={testImage}
-              style={styles.image}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.routineBox}>
-            <View style={styles.routineIntro}>
-              <View style={styles.routineTitle}>
-                <Text style={styles.routineTitleText}>방해되는 요소 차단</Text>
-              </View>
-              <Text style={styles.routineDesc}>
-                아무에게도 방해받기 싫으시죠?
-              </Text>
-            </View>
-            <Image
-              source={testImage}
-              style={styles.image}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.routineBox}>
-            <View style={styles.routineIntro}>
-              <View style={styles.routineTitle}>
-                <Text style={styles.routineTitleText}>방해되는 요소 차단</Text>
-              </View>
-              <Text style={styles.routineDesc}>
-                아무에게도 방해받기 싫으시죠?
-              </Text>
-            </View>
-            <Image
-              source={testImage}
-              style={styles.image}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.routineBox}>
-            <View style={styles.routineIntro}>
-              <View style={styles.routineTitle}>
-                <Text style={styles.routineTitleText}>방해되는 요소 차단</Text>
-              </View>
-              <Text style={styles.routineDesc}>
-                아무에게도 방해받기 싫으시죠?
-              </Text>
-            </View>
-            <Image
-              source={testImage}
-              style={styles.image}
-            ></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.routineBox}>
-            <View style={styles.routineIntro}>
-              <View style={styles.routineTitle}>
-                <Text style={styles.routineTitleText}>방해되는 요소 차단</Text>
-              </View>
-              <Text style={styles.routineDesc}>
-                아무에게도 방해받기 싫으시죠?
-              </Text>
-            </View>
-            <Image
-              source={testImage}
-              style={styles.image}
-            ></Image>
-          </TouchableOpacity>
+          {RecData &&
+            RecData.map((item, index) => (
+              <TouchableOpacity
+                style={styles.routineBox}
+                onPress={() => {
+                  setIsModalVisible(true);
+                  setModalContent(item);
+                }}
+              >
+                <View style={styles.routineIntro}>
+                  <View style={styles.routineTitle}>
+                    <Text style={styles.routineTitleText}>{item.name}</Text>
+                  </View>
+                  <Text style={styles.routineDesc}>{item.detail}</Text>
+                </View>
+                <Image
+                  source={testImage}
+                  style={styles.image}
+                ></Image>
+              </TouchableOpacity>
+            ))}
         </ScrollView>
       </View>
     </>
@@ -108,7 +58,6 @@ export default function Age() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
-    // alignItems: "",
     width: "100%",
     height: "100%",
     paddingTop: "5%",
@@ -126,7 +75,7 @@ const styles = StyleSheet.create({
   },
   routineBox: {
     width: "100%",
-    height: "15%",
+    height: 100,
     backgroundColor: "#EDEDED",
     borderRadius: "15px",
     flexDirection: "row",

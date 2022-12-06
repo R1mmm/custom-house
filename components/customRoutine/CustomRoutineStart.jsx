@@ -14,7 +14,8 @@ export default function CustomRoutineStart({ navigation }) {
           style={styles.image}
         ></Image> */}
         <Text style={styles.explainText}>
-          김엘지님에게
+          <Text style={{ color: "#66CC99" }}>김엘지</Text>
+          님에게
           {"\n"}꼭 맞는 루틴을 만들어보세요.
         </Text>
         <Text style={styles.explainSubText}>간편한 명령어, 시간설정으로</Text>
