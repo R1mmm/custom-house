@@ -10,4 +10,14 @@ const userId = atom({
   default: null,
 });
 
-export { prodList, userId };
+const userName = atom({
+  key: "userName",
+  default: null,
+});
+
+const userRoutines = atom({
+  key: "userRoutines",
+  default: null,
+});
+
+export { prodList, userId, userName, userRoutines };

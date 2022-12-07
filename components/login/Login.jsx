@@ -10,6 +10,7 @@ import {
   Alert,
 } from "react-native";
 import Text from "../utils/text";
+import Logo from "../../assets/logoImg.png";
 import Light from "../../assets/house_light.png";
 import axios from "axios";
 import baseURL from "../../baseURL";
@@ -71,7 +72,11 @@ export default function Login({ navigation }) {
           style={styles.image}
         />
       </View>
-      <Text style={styles.customHouse}>내멋대로ㅎLG</Text>
+      <Image
+        source={Logo}
+        style={styles.logoImg}
+      ></Image>
+      {/* <Text style={styles.customHouse}>내멋대로ㅎLG</Text> */}
 
       <View style={styles.idAndPw}>
         <View style={styles.inputBox}>
@@ -130,6 +135,11 @@ const styles = StyleSheet.create({
   imageView: {
     width: 250,
     height: 250,
+  },
+  logoImg: {
+    width: 180,
+    marginTop: 30,
+    height: 30,
   },
   image: {
     width: 250,

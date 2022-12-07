@@ -8,11 +8,14 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import styled from "styled-components";
 import Text from "../utils/text";
+import { userRoutines } from "../utils/atom";
+import { useRecoilState } from "recoil";
 import { LGlogo } from "../../assets";
 import baseURL from "../../baseURL";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Home() {
+  const [routines, setRoutines] = useRecoilState(userRoutines);
   const [userName, setUserName] = useState("");
   const [userId, setUserId] = useState("");
   const [userRoutine, setUserRoutine] = useState([]);
@@ -24,16 +27,19 @@ export default function Home() {
     setUserId(result);
   });
 
+  useEffect(() => {}, [routines, setRoutines]);
+
   useEffect(() => {
     if (userId !== "") {
       setTimeout(() => {
         axios
           .get(`${baseURL}/routine/${userId}`)
-          .then(function (response) {
+          .then((response) => {
             setUserRoutine(response.data[0]);
+            setRoutines(response.data[0]);
             console.log(response);
           })
-          .catch(function (error) {
+          .catch((error) => {
             console.log(error);
             // Alert.alert("정보 가져오기 실패");
           });
@@ -98,12 +104,12 @@ export default function Home() {
           </Text>
 
           <View style={styles.routinListBox}>
-            {userRoutine.length === 0 ? (
+            {routines.length === 0 ? (
               <RoutinListText style={{ color: "#b9b9b9" }}>
                 적용중인 루틴이 없어요
               </RoutinListText>
             ) : (
-              userRoutine.map((Item, idx) => (
+              routines.map((Item, idx) => (
                 <RoutinListText>{Item}</RoutinListText>
               ))
             )}
@@ -115,8 +121,8 @@ export default function Home() {
             님이 현재 실행중인 제품이에요
           </Text>
           <View style={styles.routinListBox}>
-            <RoutinListText>LG 트롬 건조기</RoutinListText>
-            <RoutinListText>대박 짱 큰 티비</RoutinListText>
+            <RoutinListText>건조기</RoutinListText>
+            <RoutinListText>TV</RoutinListText>
             <RoutinListText>공기청정기</RoutinListText>
           </View>
         </View>

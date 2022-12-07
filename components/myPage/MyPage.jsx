@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, Alert } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Text from "../utils/text";
 import { StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -38,8 +38,8 @@ export default function MyPage({ navigation }) {
       <View style={styles.myInfo}>
         <View>
           <Text style={styles.myInfoText}>내 정보</Text>
-          <Text style={styles.myInfoContent}>이름: 냥경훈</Text>
-          <Text style={styles.myInfoContent}>ID: kitty_gang</Text>
+          <Text style={styles.myInfoContent}>이름: 김엘지</Text>
+          <Text style={styles.myInfoContent}>ID: kimlg</Text>
         </View>
         <View style={styles.profile}></View>
       </View>

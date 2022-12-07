@@ -11,11 +11,11 @@ export default function HotRoutine() {
   const getRoutines = async () => {
     await axios
       .get(`${baseURL}/trending-routines`)
-      .then(function (response) {
+      .then((response) => {
         setTrendingRoutines(response.data);
         console.log(response);
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -73,6 +73,7 @@ const RoutineTitle = styled.View`
   /* background-color: #4c9b62; */
   display: flex;
   flex-direction: column;
+  width: 100px;
 `;
 
 const RoutinePodcs = styled.View`
@@ -83,6 +84,7 @@ const RoutinePodcs = styled.View`
 
 const RoutineUser = styled.View`
   display: flex;
+  width: 80px;
   height: 60px;
   flex-direction: column;
   justify-content: space-between;

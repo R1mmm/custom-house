@@ -3,13 +3,14 @@ import { useState, useRef, useEffect } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import {
   StyleSheet,
-  Text,
   View,
   TextInput,
   TouchableOpacity,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
 } from "react-native";
+import Text from "../utils/text";
 import axios from "axios";
 import baseURL from "../../baseURL";
 
@@ -76,86 +77,121 @@ export default function SignUp({ navigation }) {
   return (
     <View style={styles.Container}>
       <Text style={styles.signupFont}>내멋대로ㅎLG 회원가입</Text>
-
-      <ScrollView style={styles.mainContainer}>
-        <Text style={styles.inputTitle}>이름</Text>
-        <TextInput
-          placeholder="이름"
-          onChangeText={setName}
-          style={styles.textInput}
-        />
-        <Text style={styles.inputTitle}>아이디</Text>
-        <View style={styles.idContainer}>
+      <KeyboardAvoidingView behavior={"padding"}>
+        <ScrollView style={styles.mainContainer}>
+          <Text style={styles.inputTitle}>이름</Text>
           <TextInput
-            placeholder="ID"
-            onChangeText={setId}
+            placeholder="이름"
+            onChangeText={setName}
             style={styles.textInput}
           />
-          {/* <TouchableOpacity
+          <Text style={styles.inputTitle}>아이디</Text>
+          <View style={styles.idContainer}>
+            <TextInput
+              placeholder="ID"
+              onChangeText={setId}
+              style={styles.textInput}
+            />
+            {/* <TouchableOpacity
             style={styles.idButton}
             // onPress={() => navigation.navigate("Main")}
           >
             <Text style={styles.idButtonFont}>중복 확인</Text>
           </TouchableOpacity> */}
-        </View>
-        <Text style={styles.inputTitle}>비밀번호</Text>
-        <TextInput
-          placeholder="비밀번호 8자 이상"
-          secureTextEntry={true}
-          onChangeText={setPassword}
-          style={styles.textInput}
-        />
-        {password.length >= 8 ? null : (
-          <Text style={{ color: "red", marginBottom: 15 }}>
-            비밀번호는 8자 이상이어야 합니다
-          </Text>
-        )}
-        <Text style={styles.inputTitle}>비밀번호 확인</Text>
-        <TextInput
-          placeholder="비밀번호 확인"
-          secureTextEntry={true}
-          onChangeText={(text) => checkPassword(text)}
-          style={styles.textInput}
-        />
-        {pw ? (
-          <Text style={{ color: "green", marginBottom: 15 }}>
-            비밀번호가 일치합니다.
-          </Text>
-        ) : (
-          <Text style={{ color: "red", marginBottom: 15 }}>
-            비밀번호가 일치하지 않습니다.
-          </Text>
-        )}
-        <Text style={styles.inputTitle}>전화번호</Text>
-        <TextInput
-          keyboardType="numeric"
-          placeholder="전화번호"
-          style={styles.textInput}
-        />
-        {/* <Text style={styles.inputTitle}>이메일</Text>
+          </View>
+          <Text style={styles.inputTitle}>비밀번호</Text>
+          <TextInput
+            placeholder="비밀번호 8자 이상"
+            secureTextEntry={true}
+            onChangeText={setPassword}
+            style={styles.textInput}
+          />
+          {password.length >= 8 ? null : (
+            <Text style={{ color: "red", marginBottom: 15 }}>
+              비밀번호는 8자 이상이어야 합니다
+            </Text>
+          )}
+          <Text style={styles.inputTitle}>비밀번호 확인</Text>
+          <TextInput
+            placeholder="비밀번호 확인"
+            secureTextEntry={true}
+            onChangeText={(text) => checkPassword(text)}
+            style={styles.textInput}
+          />
+          {pw ? (
+            <Text style={{ color: "green", marginBottom: 15 }}>
+              비밀번호가 일치합니다.
+            </Text>
+          ) : (
+            <Text style={{ color: "red", marginBottom: 15 }}>
+              비밀번호가 일치하지 않습니다.
+            </Text>
+          )}
+          <Text style={styles.inputTitle}>전화번호</Text>
+          <TextInput
+            keyboardType="numeric"
+            placeholder="전화번호"
+            style={styles.textInput}
+          />
+          {/* <Text style={styles.inputTitle}>이메일</Text>
         <TextInput
           placeholder="E-mail"
           onChangeText={set}
 
           style={styles.textInput}
         /> */}
-        <Text style={styles.inputTitle}>성별</Text>
-        <View style={styles.radioButtonContainer}>
+          <Text style={styles.inputTitle}>성별</Text>
+          <View style={styles.radioButtonContainer}>
+            <SelectDropdown
+              data={genders}
+              defaultButtonText="성별"
+              buttonTextStyle={{
+                color: "#30a874",
+                fontWeight: "600",
+                fontFamily: "nanum",
+              }}
+              buttonStyle={{
+                borderRadius: 10,
+                fontSize: 18,
+                backgroundColor: "#f3f3f3",
+              }}
+              onSelect={(selectedItem, index) => {
+                console.log(selectedItem, index);
+                setGender(selectedItem);
+              }}
+              buttonTextAfterSelection={(selectedItem, index) => {
+                return selectedItem;
+              }}
+              rowTextForSelection={(item, index) => {
+                return item;
+              }}
+            />
+          </View>
+          <Text style={styles.inputTitle}>나이</Text>
+          <TextInput
+            keyboardType="numeric"
+            placeholder="나이"
+            onChangeText={setAge}
+            style={styles.textInput}
+          />
+          <Text style={styles.inputTitle}>가구 크기</Text>
           <SelectDropdown
-            data={genders}
-            defaultButtonText="성별"
+            data={households}
+            defaultButtonText="가구 크기"
             buttonTextStyle={{
               color: "#30a874",
+              fontFamily: "nanum",
               fontWeight: "600",
             }}
             buttonStyle={{
               borderRadius: 10,
               fontSize: 18,
+              marginTop: 10,
               backgroundColor: "#f3f3f3",
             }}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
-              setGender(selectedItem);
+              setHousehold(selectedItem);
             }}
             buttonTextAfterSelection={(selectedItem, index) => {
               return selectedItem;
@@ -164,45 +200,13 @@ export default function SignUp({ navigation }) {
               return item;
             }}
           />
-        </View>
-        <Text style={styles.inputTitle}>나이</Text>
-        <TextInput
-          keyboardType="numeric"
-          placeholder="나이"
-          onChangeText={setAge}
-          style={styles.textInput}
-        />
-        <Text style={styles.inputTitle}>가구 크기</Text>
-        <SelectDropdown
-          data={households}
-          defaultButtonText="가구 크기"
-          buttonTextStyle={{
-            color: "#30a874",
-            fontWeight: "600",
-          }}
-          buttonStyle={{
-            borderRadius: 10,
-            fontSize: 18,
-            marginTop: 10,
-            backgroundColor: "#f3f3f3",
-          }}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
-            setHousehold(selectedItem);
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            return item;
-          }}
-        />
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
       <TouchableOpacity
         style={styles.signupButton}
         onPress={signUp}
       >
-        <Text style={styles.signupFont2}>Sign Up</Text>
+        <Text style={styles.signupFont2}>회원가입</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
@@ -231,8 +235,8 @@ const styles = StyleSheet.create({
     paddingLeft: "3%",
     // paddingTop: 20,
     marginBottom: "15%",
-    marginTop: "10%",
-    width: "100%",
+    marginTop: 60,
+    width: 300,
     height: "100%",
     flexDirection: "column",
   },
@@ -243,7 +247,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     border: "1px solid",
     height: 50,
-    width: 270,
+    width: 250,
     fontSize: 18,
     marginTop: 5,
     marginBottom: 10,
@@ -255,7 +259,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   signupButton: {
-    width: 180,
+    width: 300,
     height: 50,
     paddingLeft: 20,
     paddingRight: 20,
@@ -263,11 +267,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: "17px",
+    borderRadius: 70,
     backgroundColor: "#66CC99",
   },
   signupFont2: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "600",
     color: "white",
   },

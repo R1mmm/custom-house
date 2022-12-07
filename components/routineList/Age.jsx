@@ -11,7 +11,7 @@ import React, { useState } from "react";
 import testImage from "../../assets/test_image.png";
 import RecData from "../utils/recData";
 
-export default function Age() {
+export default function Age({ navigation }) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState();
 
