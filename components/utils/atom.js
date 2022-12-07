@@ -17,7 +17,7 @@ const userName = atom({
 
 const userRoutines = atom({
   key: "userRoutines",
-  default: null,
+  default: [],
 });
 
 export { prodList, userId, userName, userRoutines };
