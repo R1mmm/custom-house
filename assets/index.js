@@ -13,4 +13,8 @@ export { default as cleaner } from "./cleaner.png";
 export { default as splash } from "./splash.png";
 export { default as LGlogo } from "./LGlogo.png";
 
-export { default as customRoutinePic } from "./customRoutine.png";
+export { default as summer } from "./rcomImg1.png";
+export { default as backHome } from "./rcomImg2.png";
+export { default as morning } from "./rcomImg3.png";
+export { default as happy } from "./rcomImg4.png";
+export { default as tired } from "./test_image.png";

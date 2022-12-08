@@ -8,7 +8,11 @@ import {
 import RoutineModal from "./RoutineModal";
 import Text from "../utils/text";
 import React, { useState } from "react";
-import testImage from "../../assets/test_image.png";
+// import Image1 from "../../assets/rcomImg1.png";
+// import Image2 from "../../assets/rcomImg2.png";
+// import Image3 from "../../assets/rcomImg3.png";
+// import Image4 from "../../assets/rcomImg4.png";
+// import testImage from "../../assets/test_image.png";
 import RecData from "../utils/recData";
 
 export default function Age({ navigation }) {
@@ -44,7 +48,7 @@ export default function Age({ navigation }) {
                   <Text style={styles.routineDesc}>{item.detail}</Text>
                 </View>
                 <Image
-                  source={testImage}
+                  source={item.profileImg}
                   style={styles.image}
                 ></Image>
               </TouchableOpacity>

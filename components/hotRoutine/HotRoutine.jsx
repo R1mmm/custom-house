@@ -1,12 +1,15 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import Text from "../utils/text";
 import styled from "styled-components";
 import baseURL from "../../baseURL";
 import axios from "axios";
+import RoutineModal from "./RoutineModal";
 
 export default function HotRoutine() {
   const [trendingRoutines, setTrendingRoutines] = useState([]);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState();
 
   const getRoutines = async () => {
     await axios
@@ -23,30 +26,39 @@ export default function HotRoutine() {
     getRoutines();
   }, []);
   return (
-    <Root>
-      {trendingRoutines &&
-        trendingRoutines.map((routine, index) => (
-          <RoutineBox>
-            <Text style={styles.number}>{index + 1}</Text>
-            <RoutineTitle>
-              <Text style={{ fontSize: "16" }}>{routine.routineName}</Text>
-              <RoutinePodcs>
-                {routine.appliance.map((prod, index) => (
-                  <View style={styles.routineProd}>
-                    <Text style={{ color: "white", fontSize: "10" }}>
-                      {prod.name}
-                    </Text>
-                  </View>
-                ))}
-              </RoutinePodcs>
-            </RoutineTitle>
-            <RoutineUser>
-              <Text style={{ fontSize: "12" }}>by {routine.userName}</Text>
-              <Text style={{ fontSize: "12" }}>{routine.numberOfDownload}</Text>
-            </RoutineUser>
-          </RoutineBox>
-        ))}
-    </Root>
+    <>
+      <RoutineModal
+        setIsModalVisible={setIsModalVisible}
+        isModalVisible={isModalVisible}
+        modalContent={modalContent}
+      />
+      <Root>
+        {trendingRoutines &&
+          trendingRoutines.map((routine, index) => (
+            <RoutineBox onPress={() => setIsModalVisible(true)}>
+              <Text style={styles.number}>{index + 1}</Text>
+              <RoutineTitle>
+                <Text style={{ fontSize: "16" }}>{routine.routineName}</Text>
+                <RoutinePodcs>
+                  {routine.appliance.map((prod, index) => (
+                    <View style={styles.routineProd}>
+                      <Text style={{ color: "white", fontSize: "10" }}>
+                        {prod.name}
+                      </Text>
+                    </View>
+                  ))}
+                </RoutinePodcs>
+              </RoutineTitle>
+              <RoutineUser>
+                <Text style={{ fontSize: "12" }}>by {routine.userName}</Text>
+                <Text style={{ fontSize: "12" }}>
+                  {routine.numberOfDownload}
+                </Text>
+              </RoutineUser>
+            </RoutineBox>
+          ))}
+      </Root>
+    </>
   );
 }
 
@@ -55,7 +67,7 @@ const Root = styled.View`
   background-color: white;
 `;
 
-const RoutineBox = styled.View`
+const RoutineBox = styled.TouchableOpacity`
   height: 15%;
   margin-left: 20px;
   margin-right: 20px;

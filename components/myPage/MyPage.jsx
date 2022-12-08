@@ -1,7 +1,8 @@
-import { View, TouchableOpacity, Alert } from "react-native";
+import { View, TouchableOpacity, Alert, Image } from "react-native";
 import React, { useState } from "react";
 import Text from "../utils/text";
 import { StyleSheet } from "react-native";
+import profile from "../../assets/profile.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function MyPage({ navigation }) {
@@ -41,7 +42,12 @@ export default function MyPage({ navigation }) {
           <Text style={styles.myInfoContent}>이름: 김엘지</Text>
           <Text style={styles.myInfoContent}>ID: kimlg</Text>
         </View>
-        <View style={styles.profile}></View>
+        <View style={styles.profile}>
+          <Image
+            source={profile}
+            style={styles.profileImg}
+          ></Image>
+        </View>
       </View>
       <TouchableOpacity
         style={styles.listContainer}
@@ -94,6 +100,12 @@ const styles = StyleSheet.create({
     height: 100,
     width: 100,
     backgroundColor: "#ebebeb",
+    borderRadius: 10,
+  },
+  profileImg: {
+    height: 100,
+    width: 100,
+    opacity: 0.3,
     borderRadius: 10,
   },
 });
